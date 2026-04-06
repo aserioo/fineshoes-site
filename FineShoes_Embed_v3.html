@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine Shoes - Embedded Store</title>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({ publicKey: "WIX_EMAILJS_PUBLIC_KEY" });
+        })();
+    </script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+/* --- 1. RESET & VARS --- */
+        :root {
+            --bg: #fff;
+            --text: #111;
+            --accent: #d4af37;
+            --font-head: 'Bodoni Moda', serif;
+            --font-body: 'Jost', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- 2. HEADER & STRIP --- */
+        .top-strip {
+            background: #0a0a0a;
+            color: #fff;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #222;
+        }
+
+        .ts-left i {
+            color: #25D366;
+            font-size: 1.1rem;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .ts-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .ts-right i {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .ts-right i:hover {
+            color: var(--accent);
+        }
+
+        .lang-switch {
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 10px;
+            border-left: 1px solid #444;
+            padding-left: 10px;
+        }
+
+        .lang-switch span {
+            transition: 0.3s;
+        }
+
+        .lang-active {
+            color: #fff !important;
+            font-weight: 800 !important;
+            text-decoration: underline;
+            opacity: 1;
+        }
+
+        .lang-passive {
+            color: #888 !important;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .lang-passive:hover {
+            color: #fff !important;
+            opacity: 1;
+        }
+
+        /* Sticky Header Logic */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            color: #fff;
+            background: transparent;
+            transition: background 0.3s, padding 0.3s;
+        }
+
+        header.scrolled,
+        header.forced-solid {
+            background: #000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-inner {
+            height: 80px;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -1px;
+            color: #fff;
+        }
+
+        .menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .menu a {
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            position: relative;
+            color: #fff;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icons i {
+            color: #fff;
+        }
+
+        .quote-btn {
+            border: 1px solid #fff;
+            padding: 8px 20px;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            color: #fff;
+        }
+
+        .quote-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* --- 3. HERO & GENERAL --- */
+        .hero-sec {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+            margin-top: -80px;
+        }
+
+        .hero-img-wrap {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.5;
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        .hero-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        /* Hero Text Gradient */
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: 8vw;
+            line-height: 1.1;
+            text-transform: uppercase;
+            overflow: visible;
+        }
+
+        .hero-title span {
+            display: block;
+            opacity: 1;
+            background: linear-gradient(to right, #ffffff 20%, #d4af37 50%, #ffffff 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .cat-spacer {
+            height: 100px;
+            background: #fff;
+        }
+
+        .cat-unified {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .cat-bg-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 100%;
+            transition: transform 1s;
+        }
+
+        .cat-unified:hover .cat-bg-img {
+            transform: scale(1.02);
+        }
+
+        .cat-grid-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+        }
+
+        .cat-zone {
+            flex: 1;
+            position: relative;
+            border-right: 1px solid rgba(255, 255, 255, 0.0);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .cat-zone:hover {
+            background: rgba(0, 0, 0, 0.1);
+            border-right-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cat-labels-row {
+            display: flex;
+            width: 100%;
+            padding: 20px 0;
+            background: #fff;
+            gap: 0;
+        }
+
+        .cat-btn-wrap {
+            flex: 1;
+            padding: 0 10px;
+            display: flex;
+        }
+
+        .cat-btn {
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: #000;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .cat-btn:hover {
+            border-color: #000;
+            background: #000;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .prod-sec {
+            padding: 5rem 5%;
+            background: #fff;
+            position: relative;
+        }
+
+        /* 3-Sütunlu Ana Sayfa Ürün Izgarası */
+        /* Ana sayfa Swiper slider */
+        .home-slider-wrap {
+            position: relative;
+            padding: 0 60px;
+        }
+        .home-swiper {
+            width: 100%;
+            overflow: hidden;
+        }
+        .home-swiper .swiper-slide {
+            height: auto;
+        }
+        .home-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 48px;
+            height: 48px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .home-nav-btn:hover { background:#000; color:#fff; border-color:#000; }
+        .home-prev { left: 0; }
+        .home-next { right: 0; }
+        .home-swiper .p-card-minimal {
+            border: 1px solid #f0f0f0 !important;
+            border-radius: 2px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #fff;
+        }
+        .home-swiper .p-card-minimal:hover {
+            box-shadow: 0 12px 35px rgba(0,0,0,0.09);
+        }
+        .home-swiper .p-img-box {
+            height: 300px !important;
+            aspect-ratio: auto !important;
+            border: none !important;
+            background: #fafafa;
+        }
+        .home-swiper .p-title {
+            font-size: 1.05rem !important;
+            padding: 12px 10px 4px;
+            text-align: center;
+        }
+        .home-swiper .p-ctx-btn {
+            width: 85% !important;
+            padding: 12px 0 !important;
+        }
+        @media(max-width:768px){
+            .home-slider-wrap { padding: 0 40px; }
+        }
+
+        .sec-head {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .sec-head h2 {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            color: #000;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            transition: 0.3s;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .nav-btn:hover {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        .p-prev {
+            left: 1%;
+        }
+
+        .p-next {
+            right: 1%;
+        }
+
+        /* Product Card */
+        .p-card {
+            border: 1px solid #f5f5f5;
+            padding: 10px;
+            text-align: center;
+            transition: 0.4s;
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .p-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            transform: translateY(-5px);
+        }
+
+        .p-img-box {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            overflow: hidden;
+            padding: 10px;
+            position: relative;
+        }
+
+        .p-img-box::before {
+            content: 'İNCELE';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: #fff;
+            padding: 10px 20px;
+            border: 1px solid #000;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 5;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .p-card:hover .p-img-box::before {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .p-img {
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+
+        .p-card:hover .p-img {
+            opacity: 0.3;
+        }
+
+        /* V37/V38 PRODUCT DETAIL STYLES */
+        #product-view {
+            background: #fff;
+            min-height: 100vh;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .pd-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 5%;
+            display: flex;
+            gap: 60px;
+        }
+
+        /* V38 GALLERY LAYOUT */
+        .pd-left {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pd-main-img-wrap {
+            width: 100%;
+            height: 500px;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pd-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            transform: scale(0.9);
+            transition: 0.3s;
+        }
+
+        .pd-img:hover {
+            transform: scale(1.0);
+        }
+
+        .pd-thumbs {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+        }
+
+        .pd-thumb {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #eee;
+            padding: 5px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .pd-thumb:hover {
+            opacity: 1;
+            border-color: #ccc;
+        }
+
+        .pd-thumb.active {
+            opacity: 1;
+            border: 2px solid #000;
+        }
+
+        .pd-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        .pd-right {
+            flex: 1;
+            padding-top: 0;
+        }
+
+        .pd-breadcrumb {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .pd-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .pd-desc {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .pd-features {
+            margin-bottom: 40px;
+        }
+
+        .pd-features h4 {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .pd-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pd-features li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: #666;
+        }
+
+        .pd-features li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .pd-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+        .pd-qty-wrap {
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+        }
+
+        .pd-qty-btn {
+            padding: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .pd-qty-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .pd-qty-val {
+            width: 50px;
+            text-align: center;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .pd-add-btn {
+            background: #000;
+            color: #fff;
+            padding: 18px 40px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            flex: 1;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .pd-add-btn:hover {
+            background: var(--accent);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .related-sec {
+            padding: 80px 5%;
+            background: #fff;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .related-head {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Safe & Footer Styles (Preserved) */
+        .safe-sec {
+            display: flex;
+            min-height: 500px;
+            background: #f4f4f4;
+            margin: 50px 0;
+        }
+
+        .safe-text {
+            flex: 1;
+            padding: 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .safe-text h2 {
+            font-family: var(--font-head);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .safe-text p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .info-link {
+            font-weight: 700;
+            border-bottom: 2px solid #000;
+            padding-bottom: 3px;
+            display: inline-block;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .about-sec {
+            padding: 80px 10%;
+            text-align: center;
+            background: #fff;
+        }
+
+        .about-sec h2 {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .about-sec p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            border: 1px solid #000;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .about-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            padding: 60px 5%;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .f-head {
+            color: #fff;
+            font-family: var(--font-head);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .f-text {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .f-link {
+            display: block;
+            margin-bottom: 10px;
+            transition: 0.3s;
+            color: #999;
+        }
+
+        .f-link:hover {
+            color: #fff;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        /* COOKIE BANNER */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px 5%;
+            z-index: 9999;
+            display: none;
+            /* hidden by default, shown via JS if no consent */
+            flex-direction: column;
+            gap: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .cookie-banner.show {
+            display: flex;
+        }
+
+        .cb-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .cb-text {
+            flex: 1;
+            font-size: 0.9rem;
+            color: #444;
+            max-width: 800px;
+        }
+
+        .cb-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cb-btn {
+            padding: 10px 20px;
+            border: 1px solid #000;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: transparent;
+            transition: 0.3s;
+        }
+
+        .cb-btn.accept {
+            background: #000;
+            color: #fff;
+        }
+
+        .cb-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* CONSENT CHECKBOX */
+        .kvkk-check-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .kvkk-check-row input {
+            margin-top: 3px;
+            cursor: pointer;
+        }
+
+        .kvkk-link {
+            text-decoration: underline;
+            cursor: pointer;
+            color: #000;
+        }
+
+        /* SAFETY PAGE STYLES */
+        #safety-view {
+            background: #fff;
+            padding-bottom: 60px;
+        }
+
+        .safe-hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            min-height: 80vh;
+            padding: 40px 5%;
+            background: #111;
+            color: #fff;
+        }
+
+        .safe-hero-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+
+        .safe-hero-text h1 {
+            font-family: var(--font-head);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin: 0;
+        }
+
+        .safe-hero-img {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .safe-content-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .safe-grid-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .safe-spec-card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .safe-spec-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .safe-spec-card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .safe-spec-card h4 {
+            margin: 0 0 10px 0;
+            font-family: var(--font-head);
+        }
+
+        .safe-spec-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .safe-sizes {
+            margin-bottom: 60px;
+        }
+
+        .size-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .size-card {
+            width: 120px;
+            height: 120px;
+            background: #111;
+            color: #fff;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .size-card span {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 5px;
+            font-family: var(--font-head);
+        }
+
+        .safe-use-area {
+            background: #f4f4f4;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        @media(max-width:768px) {
+            .safe-hero {
+                padding: 80px 20px 40px;
+                text-align: center;
+            }
+
+            .safe-hero-text {
+                padding: 0;
+                margin-bottom: 40px;
+            }
+
+            .safe-hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .safe-hero-img img {
+                max-width: 80%;
+            }
+        }
+
+        /* COOKIE SETTINGS MODAL */
+        .cookie-option-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Switch CSS */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #000;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #000;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .m-box {
+            background: #fff;
+            width: 500px;
+            padding: 40px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-m {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .cart-row input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .del-btn {
+            color: red;
+            cursor: pointer;
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        .inp,
+        textarea.inp {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            font-family: inherit;
+        }
+
+        textarea.inp {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #000;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* IMPROVED ADD GROUP (V39 UPDATE) */
+        .add-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 0 5px;
+        }
+
+        .qty-stepper {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e0e0e0;
+            background: #fff;
+            height: 44px;
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: none;
+            width: 34px;
+            height: 100%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #f7f7f7;
+            color: #000;
+        }
+
+        .qty-inp {
+            border: none;
+            border-left: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+            width: 45px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #000;
+            height: 100%;
+            -moz-appearance: textfield;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        .qty-inp:focus {
+            outline: none;
+            background: #fafafa;
+        }
+
+        .qty-inp::-webkit-outer-spin-button,
+        .qty-inp::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .add-cart-btn {
+            background: #111;
+            color: #fff;
+            border: 1px solid #111;
+            padding: 0 15px;
+            height: 44px;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-cart-btn:hover {
+            background: #fff;
+            color: #111;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Page View */
+        .page-view {
+            display: none;
+            padding: 120px 10% 80px;
+            animation: fadeUp 0.5s forwards;
+            /* Added forwards to keep final state */
+            background: #fff;
+            min-height: 100vh;
+        }
+
+        .page-view.active {
+            display: block;
+            position: relative;
+            z-index: 100;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .page-content h3 {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Split */
+        .contact-split {
+            display: flex;
+            gap: 80px;
+            margin-top: 40px;
+        }
+
+        .c-info {
+            flex: 1;
+        }
+
+        .c-form {
+            flex: 1;
+            padding: 40px;
+            background: #fafafa;
+            border: 1px solid #eee;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background: #25D366;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebc59;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* --- PREMIUM PRODUCTS VIEW CSS --- */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0;
+        }
+
+        .filter-tab {
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            color: #999;
+            background: transparent;
+            border: none;
+            padding: 15px 10px;
+            cursor: pointer;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            color: #000;
+        }
+
+        .filter-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #000;
+            transition: 0.3s;
+        }
+
+        .filter-tab.active::after {
+            width: 100%;
+        }
+
+        .prod-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            padding-bottom: 50px;
+        }
+
+        /* Minimal Card Style */
+        .p-card-minimal {
+            border: none;
+            background: transparent;
+            text-align: left;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        .p-card-minimal:hover {
+            transform: translateY(-5px);
+        }
+
+        .p-card-minimal .p-img-box {
+            background: #fff;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            padding: 0;
+            border: 1px solid #eee;
+        }
+
+        .p-card-minimal .p-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            transition: 0.5s;
+            transform: scale(0.9);
+        }
+
+        .p-card-minimal:hover .p-img {
+            transform: scale(1.1);
+        }
+
+        .p-card-minimal .p-title {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .p-card-minimal .p-desc {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Quick Add Button overlay on image */
+        /* Quick Add Button overlay on image */
+        .p-ctx-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #fff;
+            color: #000;
+            border: 1px solid #000;
+            padding: 10px 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        /* --- MODERN SAFETY VIEW CSS --- */
+        .safe-v2-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px 60px 20px;
+            /* Reduced from 40px */
+            font-family: var(--font-body);
+        }
+
+        /* Hero Section */
+        .safe-v2-hero {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 30px;
+            /* Reduced from 80px */
+        }
+
+        .safe-v2-hero-text {
+            flex: 1;
+        }
+
+        .safe-v2-hero-img {
+            flex: 1;
+            text-align: center;
+        }
+
+        .safe-v2-hero-img img {
+            width: 100%;
+            max-width: 500px;
+            drop-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+        }
+
+        @media (max-width: 868px) {
+            .safe-v2-hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 30px;
+            }
+        }
+
+        /* Feature Grid */
+        .safe-v2-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+            /* Reduced from 60px */
+        }
+
+        .safe-v2-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: 0.3s;
+        }
+
+        .safe-v2-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .safe-v2-icon {
+            font-size: 2rem;
+            color: #ff6f00;
+            margin-bottom: 20px;
+        }
+
+        .safe-v2-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .safe-v2-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Docs Section */
+        .safe-v2-docs {
+            background: #f9f9f9;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 10px;
+            /* Reduced from 30px */
+        }
+
+        .safe-doc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #333;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .safe-doc-btn:hover {
+            background: #000;
+            transform: scale(1.05);
+        }
+
+        /* NEW ADDITIONS: Size & Usage */
+        .safe-mid-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            /* Reduced from 40px */
+            flex-wrap: wrap;
+        }
+
+        .safe-mid-col {
+            flex: 1;
+            background: #fff;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #eee;
+            min-width: 300px;
+        }
+
+        .safe-mid-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .safe-size-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .safe-size-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .safe-usage-list {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .safe-usage-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f4f4f4;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .safe-usage-item i {
+            color: #555;
+        }
+
+        .p-card-minimal:hover .p-ctx-btn {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    
+        .page-view { display: none; padding-top: 50px; }
+        .page-view.active { display: block; animation: fadeIn 0.5s; }
+        
+        #home-view:not(.active) { display: none !important; }
+        #home-extras:not(.active) { display: none !important; }
+        .page-view:not(.active) { display: none !important; }
+        
+        :host { display: block; font-size: 16px; }
+
+        /* ====== HAMBURGER & MOBİL MENU ====== */
+        .ham-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 4px;
+            line-height: 1;
+        }
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.96);
+            z-index: 2000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 35px;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a, .mobile-nav button {
+            color: #fff;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: var(--font-head);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .mobile-nav a:hover, .mobile-nav button:hover { color: var(--accent); }
+        .close-mn {
+            position: absolute;
+            top: 22px; right: 22px;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            line-height: 1;
+        }
+
+        /* ====== MOBİL RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            /* Top strip */
+            .top-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                padding: 8px 4%;
+                font-size: 0.72rem;
+            }
+            .ts-right { gap: 10px; }
+
+            /* Nav */
+            .menu { display: none; }
+            .ham-btn { display: block; }
+            .nav-inner { padding: 0 4%; height: 65px; }
+            .logo img.logo-img { height: 60px !important; }
+            .quote-btn { display: none; }
+
+            /* Hero */
+            .hero-title { font-size: 14vw; }
+            .hero-sec { margin-top: -65px; }
+
+            /* Kategori */
+            .cat-unified { height: 240px; }
+            .cat-btn { font-size: 0.8rem; padding: 10px 0; }
+            .cat-spacer { height: 60px; }
+
+            /* Ürünler bölümü */
+            .prod-sec { padding: 2.5rem 4%; }
+            .sec-head h2 { font-size: 1.7rem; }
+            .p-card { height: auto; min-height: 300px; }
+            .p-img-box { height: 200px; }
+            .nav-btn { width: 36px; height: 36px; font-size: 1rem; }
+
+            /* Ürün Detay */
+            .pd-content {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 4%;
+            }
+            .pd-left { flex: none; width: 100%; }
+            .pd-right { flex: none; width: 100%; }
+            .pd-main-img-wrap { height: 280px; }
+            .pd-title { font-size: 1.8rem; }
+            .pd-actions { flex-direction: column; gap: 12px; }
+            .pd-add-btn { width: 100%; text-align: center; }
+            .related-sec { padding: 40px 4%; }
+
+            /* Ana Sayfa Ürün Izgarası (mobil) */
+            .prod-grid-home {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .prod-grid-home .p-img-box {
+                height: 220px !important;
+            }
+
+            /* Tüm Ürünler Görünümü */
+            .prod-grid-full {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .page-view { padding: 60px 4% 40px; }
+            .filter-tabs { gap: 12px; }
+
+            /* İş Güvenliği */
+            .safe-sec { flex-direction: column; min-height: auto; }
+            .safe-text { padding: 6% 5%; }
+            .safe-text h2 { font-size: 2rem; }
+            .safe-v2-hero { flex-direction: column-reverse; gap: 20px; text-align: center; }
+            .safe-v2-grid { grid-template-columns: repeat(2, 1fr); }
+            .safe-v2-hero-img img { max-width: 80%; }
+
+            /* Footer */
+            .f-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+            footer { padding: 40px 5%; }
+
+            /* Modal */
+            .m-box { width: 92%; padding: 25px 20px; }
+
+            /* İletişim */
+            .contact-split { flex-direction: column; gap: 25px; }
+            .c-form { padding: 20px; }
+
+            /* About */
+            .about-sec { padding: 50px 5%; }
+
+            /* Add group */
+            .add-group { flex-wrap: wrap; }
+        }
+
+        @media (max-width: 480px) {
+            .f-grid { grid-template-columns: 1fr; }
+            .prod-grid-home { grid-template-columns: 1fr; }
+            .prod-grid-home .p-img-box { height: 260px !important; }
+            .prod-grid-full { grid-template-columns: 1fr; }
+            .safe-v2-grid { grid-template-columns: 1fr; }
+            .safe-mid-col { min-width: unset; }
+            .pd-title { font-size: 1.5rem; }
+            .sec-head h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+        
+
+    <!-- TOP STRIP -->
+    <div class="top-strip">
+        <div class="ts-left" style="display:flex; gap:20px; align-items:center;">
+            <a href="https://wa.me/905541282528"><svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> +90 554
+                128 25 28</a>
+            
+        </div>
+        <div class="ts-right">
+            <a href="https://www.trendyol.com/sr?q=Fine%20Ayakkab%C4%B1c%C4%B1l%C4%B1k&qt=Fine%20Ayakkab%C4%B1c%C4%B1l%C4%B1k&st=Fine%20Ayakkab%C4%B1c%C4%B1l%C4%B1k&os=1"
+                target="_blank" style="display:flex; align-items:center; text-decoration:none; color:inherit;">
+                Trendyol
+            </a>
+            <a href="https://www.hepsiburada.com/magaza/fine-ayakkabicilik" target="_blank"
+                style="display:flex; align-items:center; text-decoration:none; color:inherit;">
+                Hepsiburada
+            </a>
+            <a href="https://www.amazon.com.tr/s?me=A2CT3GTW9KWNIG&marketplaceID=A33AVAJ2PDY3EV" target="_blank"
+                style="display:flex; align-items:center; gap:5px;">
+                 Amazon
+            </a>
+            <span class="lang-switch">
+                <span id="lang-tr" class="lang-active" onclick="setLang('tr')">TR</span> |
+                <span id="lang-en" class="lang-passive" onclick="setLang('en')">EN</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- MAIN NAV (Sticky) -->
+    <header id="main-header">
+        <div class="nav-inner">
+            <div class="logo"><img
+                    class="logo-img" src="https://static.wixstatic.com/media/e8a500_77865bdec51246c787e11177863f8533~mv2.png"
+                    style="height:90px; width:auto;"></div>
+            <nav class="menu">
+                <a data-nav="home" data-key="nav_home" style="cursor:pointer;">Anasayfa</a>
+                <a data-nav="products" data-key="nav_products" style="cursor:pointer;">Ürünler</a>
+                <a data-nav="about" data-key="nav_about" style="cursor:pointer;">Hakkımızda</a>
+                <a data-nav="contact" data-key="nav_contact" style="cursor:pointer;">İletişim</a>
+            </nav>
+            <div class="nav-icons">
+                <a data-action="toggle-search" style="cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></a>
+                <button class="quote-btn" data-action="toggle-cart"><span data-key="quote_btn">TEKLİF LİSTESİ</span> (<span
+                        id="badge">0</span>)</button>
+                <button class="ham-btn" id="ham-btn" onclick="toggleMobileMenu(true)" aria-label="Menüyü Aç">&#9776;</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBİL MENU -->
+    <div class="mobile-nav" id="mobile-nav">
+        <button class="close-mn" onclick="toggleMobileMenu(false)" aria-label="Kapat">&times;</button>
+        <a data-nav="home" onclick="toggleMobileMenu(false)" style="cursor:pointer;" data-key="nav_home">Anasayfa</a>
+        <a data-nav="products" onclick="toggleMobileMenu(false)" style="cursor:pointer;" data-key="nav_products">Ürünler</a>
+        <a data-nav="about" onclick="toggleMobileMenu(false)" style="cursor:pointer;" data-key="nav_about">Hakkımızda</a>
+        <a data-nav="contact" onclick="toggleMobileMenu(false)" style="cursor:pointer;" data-key="nav_contact">İletişim</a>
+        <a data-nav="safety" onclick="toggleMobileMenu(false)" style="cursor:pointer;" data-key="nav_safety">İş Güvenliği</a>
+        <button data-action="toggle-cart" onclick="toggleMobileMenu(false); toggleCart();" style="font-size:1rem; margin-top:10px; border:1px solid rgba(255,255,255,0.3); padding:10px 25px; border-radius:25px;">
+            <span data-key="quote_btn">TEKLİF LİSTESİ</span> (<span id="badge-m">0</span>)
+        </button>
+    </div>
+
+    <!-- HOME VIEW -->
+    <div id="home-view" class="active">
+        <div class="hero-sec">
+            <div class="hero-img-wrap"><img
+                    src="https://static.wixstatic.com/media/e8a500_17c0e68466004db6a38f12d85669d02d~mv2.png">
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title"><span data-key="hero_l1">ZAMANSIZ</span><span data-key="hero_l2">ŞIKLIK</span>
+                </h1>
+            </div>
+        </div>
+        <div class="cat-spacer"></div>
+        <div class="cat-unified">
+            <img src="https://static.wixstatic.com/media/e8a500_7fd2db6c174d454c9c5626bbcddff08d~mv2.png"
+                class="cat-bg-img">
+            <div class="cat-grid-overlay">
+                <div class="cat-zone" data-nav="products" style="cursor:pointer;" title="Klasik"></div>
+                <div class="cat-zone" data-nav="products" style="cursor:pointer;" title="Kışlık"></div>
+                <div class="cat-zone" data-nav="products" style="cursor:pointer;" title="Yazlık"></div>
+            </div>
+        </div>
+        <div class="cat-labels-row">
+            <div class="cat-btn-wrap"><button class="cat-btn" data-nav="products" style="cursor:pointer;"
+                    data-key="cat_classic">Klasik</button>
+            </div>
+            <div class="cat-btn-wrap"><button class="cat-btn" data-nav="products" style="cursor:pointer;"
+                    data-key="cat_winter">Kışlık</button>
+            </div>
+            <div class="cat-btn-wrap"><button class="cat-btn" data-nav="products" style="cursor:pointer;"
+                    data-key="cat_summer">Yazlık</button>
+            </div>
+        </div>
+        <div class="prod-sec" id="all-products">
+            <div class="sec-head">
+                <h2 data-key="all_products">Tüm Ürünler</h2>
+            </div>
+            <div class="home-slider-wrap">
+                <button class="home-nav-btn home-prev" id="home-prev">&#8592;</button>
+                <div class="swiper home-swiper" id="home-swiper">
+                    <div class="swiper-wrapper" id="p-track"></div>
+                </div>
+                <button class="home-nav-btn home-next" id="home-next">&#8594;</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- HOME EXTRAS (Safety & About sections - shown only on home) -->
+    <div id="home-extras" class="active">
+        <div class="safety-preview-sec" style="padding:60px 0; background:#fff;">
+            <!-- Unified Card Container (Full Bleed) -->
+            <div style="width:100%; max-width:none; margin:0 auto; border-bottom:1px solid #e0e0e0; background:#fff;">
+
+                <!-- Top Images Row (No Gap, Full Width of Card) -->
+                <div style="display:flex; width:100%;">
+                    <div style="flex:1; min-width:300px;">
+                        <img class="logo-img" src="https://static.wixstatic.com/media/e8a500_77865bdec51246c787e11177863f8533~mv2.png"
+                            style="width:100%; height:100%; object-fit:cover; display:block;">
+                    </div>
+                    <div style="flex:1; min-width:300px;">
+                        <img src="https://static.wixstatic.com/media/e8a500_8916889f635642b2bc2cbfb94269ec25~mv2.png"
+                            style="width:100%; height:100%; object-fit:cover; display:block;">
+                    </div>
+                </div>
+
+                <!-- Bottom Text Section (Inside Card) -->
+                <div style="padding:50px 40px; text-align:center;">
+                    <h2 data-key="safe_main_title"
+                        style="font-size:3rem; margin-bottom:25px; color:#333; letter-spacing:-1px;">Profesyonel Çelik
+                        Burunlu Ziyaretçi Çarığı</h2>
+                    <p data-key="safe_subtitle"
+                        style="font-size:1.4rem; margin-bottom:30px; color:#666; letter-spacing:2px; font-weight:300; text-transform:uppercase;">
+                        SAHA KORUMA ÇÖZÜMÜ</p>
+                    <p data-key="safety_text"
+                        style="color:#555; line-height:1.8; max-width:900px; margin:0 auto 40px auto; font-size:1.1rem;">
+                        İş sağlığı ve güvenliği standartlarına (EN ISO 20345) tam uyumlu, CE belgeli profesyonel koruma.
+                        Misafirleriniz ve saha personeliniz için anında, pratik ve güvenilir çözüm.</p>
+
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:30px;">
+                        <button data-nav="safety-main" style="cursor:pointer;" class="cta-btn"
+                            style="background:#ff6f00; color:#fff; padding:15px 60px; font-weight:bold; border:none; border-radius:30px; transition:0.3s; cursor:pointer; font-size:1.1rem; box-shadow: 0 4px 15px rgba(255, 111, 0, 0.3);"
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 111, 0, 0.4)'"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 111, 0, 0.3)'">BİLGİ
+                            AL & BELGELER <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512" fill="currentColor"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></button>
+
+                        <div
+                            style="display:flex; align-items:center; justify-content:center; gap:40px; color:#444; font-weight:500; font-size:1.05rem; flex-wrap:wrap;">
+                            <span style="display:flex; align-items:center; gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="18" viewBox="0 0 384 512" fill="#2c3e50"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg> ISO 20345</span>
+                            <span style="display:flex; align-items:center; gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="#2c3e50"><path d="M318.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-120 120c-12.5 12.5-12.5 32.8 0 45.3l16 16c12.5 12.5 32.8 12.5 45.3 0l4-4L325.4 293.3c36.4 36.4 36.4 95.4 0 131.8c-36.4 36.4-95.4 36.4-131.8 0l-42.7-42.7c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l42.7 42.7c11.4 11.4 29.9 11.4 41.3 0c11.4-11.4 11.4-29.9 0-41.3L173.7 232l-4.1 4.1c-12.5 12.5-32.8 12.5-45.3 0l-16-16c-12.5-12.5-12.5-32.8 0-45.3l120-120c12.5-12.5 32.8-12.5 45.3 0l76.2 76.2c12.5 12.5 32.8 12.5 45.3 0l111-111c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L440 177.3l29.7 29.7c12.5 12.5 12.5 32.8 0 45.3l-128 128c-12.5 12.5-32.8 12.5-45.3 0l-29.7-29.7L318.6 9.4z"/></svg> 200 Joul</span>
+                            <span style="display:flex; align-items:center; gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="#2c3e50"><path d="M24 32C10.7 32 0 42.7 0 56V456c0 13.3 10.7 24 24 24H40c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24H24zm88 0c-8.8 0-16 7.2-16 16V464c0 8.8 7.2 16 16 16s16-7.2 16-16V48c0-8.8-7.2-16-16-16zm72 0c-13.3 0-24 10.7-24 24V456c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24H184zm96 0c-13.3 0-24 10.7-24 24V456c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24H280zM440 0c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32z"/></svg> CE Belgeli</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-sec" id="about-sec">
+            <h2 data-key="about_title">Hakkımızda</h2>
+            <p data-key="about_teaser">Kaliteye Atılan Güvenli Bir Adım. Üretimden tasarıma, her aşamada yerli üretim ve
+                üstün kalite prensibiyle hareket ediyoruz. Fine Ayakkabıcılık A.Ş., estetiği uzun ömürlü kullanım
+                sözüyle birleştirerek ayaklarınıza hak ettiği konforu sunar. Sektördeki profesyonel deneyimimizle
+                yanınızdayız.</p>
+            <button class="about-btn" data-nav="about" style="cursor:pointer;" data-key="corp_intro">KURUMSAL TANITIM →</button>
+        </div>
+    </div>
+    
+
+    <!-- NEW FULL SAFETY PAGE VIEW -->
+    <div id="safety-main-view" class="page-view"><div class="safe-v2-container">
+
+            <!-- V5 HEADER & HERO SPLIT -->
+            <div style="display:flex; flex-wrap:wrap; gap:40px; margin-bottom:50px; align-items:center;">
+                <!-- Left: Image -->
+                <div style="flex:1; min-width:300px;">
+                    <img src="https://static.wixstatic.com/media/e8a500_8916889f635642b2bc2cbfb94269ec25~mv2.png"
+                        style="width:100%; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.1);">
+                </div>
+                <!-- Right: Info -->
+                <div style="flex:1.2; min-width:300px;">
+                    <span
+                        style="background:#f0f0f0; color:#555; padding:6px 14px; border-radius:30px; font-size:0.85rem; font-weight:700; letter-spacing:1px; display:inline-block; margin-bottom:15px;">PROFESYONEL
+                        SERİ</span>
+                    <h1 style="font-size:2.5rem; margin-bottom:20px; line-height:1.2;">Profesyonel Çelik Burunlu
+                        Ziyaretçi Çarığı</h1>
+                    <p style="font-size:1.1rem; color:#666; line-height:1.6; margin-bottom:30px;">
+                        Fabrika ve şantiye ziyaretlerinizde misafirleriniz için maksimum güvenlik.
+                        EN ISO 20345:2012 standartlarına tam uyumlu, 200 Joul darbeye dayanıklı çelik burunlu koruyucu
+                        çarık.
+                    </p>
+
+                    <div style="display:flex; gap:20px; margin-bottom:30px; flex-wrap:wrap;">
+                        <button data-action="add-product" data-product-id="2" class="cta-btn" style="padding:18px 40px; font-size:1.1rem; cursor:pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512" fill="currentColor" style="margin-right:8px;"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z" /></svg> LİSTEYE EKLE (+10)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- V5 SPEC GRID (5 Columns) -->
+            <div class="safe-v2-grid">
+                <!-- 200 Joul -->
+                <div class="safe-v2-card">
+                    <div class="safe-v2-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="#2c3e50"><path d="M318.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-120 120c-12.5 12.5-12.5 32.8 0 45.3l16 16c12.5 12.5 32.8 12.5 45.3 0l4-4L325.4 293.3c36.4 36.4 36.4 95.4 0 131.8c-36.4 36.4-95.4 36.4-131.8 0l-42.7-42.7c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l42.7 42.7c11.4 11.4 29.9 11.4 41.3 0c11.4-11.4 11.4-29.9 0-41.3L173.7 232l-4.1 4.1c-12.5 12.5-32.8 12.5-45.3 0l-16-16c-12.5-12.5-12.5-32.8 0-45.3l120-120c12.5-12.5 32.8-12.5 45.3 0l76.2 76.2c12.5 12.5 32.8 12.5 45.3 0l111-111c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L440 177.3l29.7 29.7c12.5 12.5 12.5 32.8 0 45.3l-128 128c-12.5 12.5-32.8 12.5-45.3 0l-29.7-29.7L318.6 9.4z"/></svg></div>
+                    <div class="safe-v2-title">200 Joul Koruma</div>
+                </div>
+                <!-- Compression -->
+                <div class="safe-v2-card">
+                    <div class="safe-v2-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="#2c3e50"><path d="M200 200h-32V32h80v32h-48v136zm-80 0v-48H32v-32h128v80H120zm0 112H32v-32h88v-48h32v80H120zm80 0v136h-32V280h-48v-32h80v64zm112 0v136h-32V280h-48v-32h80v64zm112 0H336v-32h128v80h-40v-48zm0-112h-88v-48h-32v80h120v-32z"/></svg></div>
+                    <div class="safe-v2-title">Sıkışma Direnci</div>
+                </div>
+                <!-- Sole -->
+                <div class="safe-v2-card">
+                    <div class="safe-v2-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="#2c3e50"><path d="M280.9 92c-29.6-18.7-65.1-23.8-93-16.1l-10 2.8c-26.2 7.3-51.6 3-72.3-10-8.9-5.6-17.5-12.7-25-21.4-1.2-1.4-3.1-2-4.9-1.9C36.1 48.7 13.9 83.2 24.3 120.5c7.9 28.5 28.6 63.3 54.3 93.3l6.5 7.6c1.1 1.3 2.7 2 4.4 2 .4 0 .9-.1 1.3-.2l15.1-4.2c2.6-.7 4.1-3.4 3.4-6l-20-72.1 17.3-4.8 20 72.1c.7 2.6 3.4 4.1 6 3.4l15.1-4.2c2.6-.7 4.1-3.4 3.4-6l-20-72.1 17.3-4.8 20 72.1c.7 2.6 3.4 4.1 6 3.4l15.1-4.2c2.6-.7 4.1-3.4 3.4-6l-20-72.1 17.3-4.8 20 72.1c.7 2.6 3.4 4.1 6 3.4l13.9-3.9s4.8-1.4 12.3-3.4c29.1-7.8 55.4-34.3 64-67.4 7.5-28.7-7-57.8-31.5-73.6zM487.6 156.4c-8.9 5.6-17.5 12.7-25 21.4-1.2 1.4-3.1 2-4.9 1.9-39.6-3.3-61.9 31.2-51.4 68.6 7.9 28.5 28.6 63.3 54.3 93.3l6.5 7.6c1.1 1.3 2.7 2 4.4 2 .4 0 .9-.1 1.3-.2l15.1-4.2c2.6-.7 4.1-3.4 3.4-6l-20-72.1 17.3-4.8 20 72.1c.7 2.6 3.4 4.1 6 3.4l15.1-4.2c2.6-.7 4.1-3.4 3.4-6l-20-72.1 17.3-4.8 20 72.1c.7 2.6 3.4 4.1 6 3.4l15.1-4.2c2.6-.7 4.1-3.4 3.4-6l-20-72.1 17.3-4.8 20 72.1c.7 2.6 3.4 4.1 6 3.4l13.9-3.9s4.8-1.4 12.3-3.4c29.1-7.8 55.4-34.3 64-67.4 7.5-28.6-7-57.7-31.5-73.6-29.6-18.7-65.1-23.8-93-16.1l-10 2.8c-26.2 7.3-51.6 3-72.3-10z"/></svg></div>
+                    <div class="safe-v2-title">Kaymaz Taban</div>
+                </div>
+                <!-- ISO -->
+                <div class="safe-v2-card">
+                    <div class="safe-v2-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="18" viewBox="0 0 384 512" fill="#2c3e50"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></div>
+                    <div class="safe-v2-title">ISO 20345</div>
+                </div>
+                <!-- CE -->
+                <div class="safe-v2-card">
+                    <div class="safe-v2-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="#2c3e50"><path d="M24 32C10.7 32 0 42.7 0 56V456c0 13.3 10.7 24 24 24H40c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24H24zm88 0c-8.8 0-16 7.2-16 16V464c0 8.8 7.2 16 16 16s16-7.2 16-16V48c0-8.8-7.2-16-16-16zm72 0c-13.3 0-24 10.7-24 24V456c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24H184zm96 0c-13.3 0-24 10.7-24 24V456c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24H280zM440 0c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32z"/></svg></div>
+                    <div class="safe-v2-title">CE Belgeli</div>
+                </div>
+            </div>
+
+            <!-- V5 TECHNICAL DETAILS (Merged Section) -->
+            <div
+                style="background:#fff; border:1px solid #eee; border-radius:20px; padding:40px; margin-bottom:40px; box-shadow:0 10px 30px rgba(0,0,0,0.02);">
+                <div style="display:flex; flex-wrap:wrap; gap:40px;">
+                    <!-- Technical Specs -->
+                    <div style="flex:1; min-width:250px;">
+                        <h3
+                            style="font-size:1.2rem; margin-bottom:20px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                            Teknik Özellikler</h3>
+                        <ul style="list-style:none; line-height:2.2; color:#555;">
+                            <li><strong>Malzeme:</strong> Nefes alabilir suni deri</li>
+                            <li><strong>Burun:</strong> Çelik (200 Joul Dayanımlı)</li>
+                            <li><strong>Taban:</strong> Çift yoğunluklu PU</li>
+                            <li><strong>Astar:</strong> Ter emici tekstil</li>
+                            <li><strong>Renk:</strong> Siyah</li>
+                        </ul>
+                    </div>
+                    <!-- Usage Areas -->
+                    <div style="flex:1; min-width:250px;">
+                        <h3
+                            style="font-size:1.2rem; margin-bottom:20px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                            Kullanım Alanları</h3>
+                        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                            <span class="safe-usage-item"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="#555"><path d="M496 384H128V80c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16v304H16c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16v-96c0-8.8-7.2-16-16-16zM384 352H256v-96L384 352zm112 0H384v-96l112 96z"/></svg> Fabrika</span>
+                            <span class="safe-usage-item"><svg xmlns="http://www.w3.org/2000/svg" height="18" width="20" viewBox="0 0 640 512" fill="#555"><path d="M504 352H136.4c-4.4-4.5-8.8-10.1-12.3-17-7-13.9-10.8-30.8-10.4-50 1-52.5 39.4-81.2 43.1-83.8 2.2-1.5 6.4-5.3 5.3-7.7-1.1-2.4-5.7-2.3-7.9-2.3H56c-13.3 0-24 10.7-24 24v162.8c-1.3.5-2.7.9-4 1.5-26.6 12-42 40.5-37.1 70.3 3.9 23.9 21.6 44.3 45.3 50.8 7.3 2 14.8 2.7 22.1 2.3v13.2c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24v-6.9c5.5-1.9 10.8-4.4 15.6-7.5 13.1-8.5 21.8-22.6 23.5-38.3 1.2-11.2-2.3-21.6-8.5-30.1-5.6-7.6-13.2-13.4-21.7-16.7l13.4-3.1h345.8l13.4 3.1c-8.5 3.3-16.1 9.1-21.7 16.7-6.2 8.5-9.6 18.9-8.5 30.1 1.7 15.8 10.4 29.8 23.5 38.3 4.9 3.1 10.1 5.6 15.6 7.5v6.9c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24v-13.2c7.4.3 14.8-.3 22.1-2.3 23.7-6.5 41.4-26.9 45.3-50.8 4.9-29.8-10.4-58.3-37-70.3-1.3-.6-2.7-1.1-4-1.5V64c0-13.3-10.7-24-24-24h-48c-13.3 0-24 10.7-24 24v288H504z" /></svg> Lojistik</span>
+                            <span class="safe-usage-item"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="currentColor"><path d="M480 288c0-80.2-31.3-156.2-88-212.9S240.2 15 160 15c-3.1 0-6.2 .1-9.2 .3c-28.9 1.5-56.9 8.7-82.5 21l-8 3.8C25.5 56.6 0 91.5 0 128.7V288c0 30.2 10.6 60.1 30.5 83.9c-2.3 6.9-3.5 14.2-3.5 21.6c0 35.3 28.7 64 64 64c20.4 0 39.5-9.6 51.5-26.1c7.2 3.6 15.3 5.6 23.5 5.6h38c11.6 0 22.5-4 31.1-11.4c6.6 4.7 14.7 7.4 23.4 7.4h69.5c18.5 0 34.6-11.3 41.2-27.2c6.1 2.2 12.6 3.2 19.3 3.2c35.3 0 64-28.7 64-64c0-7.4-1.3-14.7-3.5-21.6C469.4 348.1 480 318.2 480 288z"/></svg> İnşaat</span>
+                            <span class="safe-usage-item"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512" fill="currentColor"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg> Ziyaretçi</span>
+                            <span class="safe-usage-item"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 576 512" fill="currentColor"><path d="M0 80C0 53.5 21.5 32 48 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80zM64 512V320H32v192H64zM432 512V320H400v192h32zm144 0V320h-56v192h56zM464 256c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H368c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h96zM224 512V320H192v192h32z"/></svg> Depo</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sizes Row -->
+                <div style="margin-top:30px; border-top:1px solid #f0f0f0; padding-top:20px;">
+                    <h3 style="font-size:1rem; margin-bottom:15px; color:#888;">MEVCUT BEDENLER</h3>
+                    <div class="safe-size-list">
+                        <div class="safe-size-box" style="width:auto; padding:0 20px;">M (36-39)</div>
+                        <div class="safe-size-box" style="width:auto; padding:0 20px;">L (40-44)</div>
+                        <div class="safe-size-box" style="width:auto; padding:0 20px;">XL (45-48)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- V5 DECLARATION IMAGE -->
+            <div class="safe-v2-docs" style="background:transparent; padding:0; text-align:center;">
+                <h3 style="font-size:1.5rem; margin-bottom:20px;">AB Uygunluk Beyanı</h3>
+                <img src="https://static.wixstatic.com/media/e8a500_168dac684f37493e9833091c2934bed9~mv2.png"
+                    style="width:100%; max-width:700px; display:inline-block; border-radius:10px; box-shadow:0 10px 40px rgba(0,0,0,0.1);">
+            </div>
+
+            <button class="close-view-btn" data-nav="home" style="cursor:pointer;">X</button>
+        </div>
+    </div>
+    <h1 id="pd-title" class="pd-title"></h1>
+
+    <!-- PRODUCT DETAIL VIEW (V38 GALLERY) -->
+    <div id="product-view" class="page-view">
+        <div class="pd-content">
+            <div class="pd-left">
+                <!-- Main Image -->
+                <div class="pd-main-img-wrap">
+                    <img id="pd-main-img" class="pd-img" src="">
+                </div>
+                <!-- Thumbnail Strip -->
+                <div class="pd-thumbs" id="pd-thumbs-track"></div>
+            </div>
+            <div class="pd-right">
+                <div class="pd-breadcrumb" id="pd-bread"></div>
+                <h1 id="pd-title" class="pd-title"></h1>
+                <p id="pd-desc" class="pd-desc"></p>
+                <div class="pd-features">
+                    <h4 data-key="features_head">Ürün Özellikleri</h4>
+                    <ul id="pd-features-list"></ul>
+                </div>
+                <div class="pd-actions">
+                    <div class="pd-qty-wrap">
+                        <div class="pd-qty-btn" data-action="mod-qty-detail" data-amount="-10" style="cursor:pointer;">-</div>
+                        <input type="number" id="pd-qty-val" class="pd-qty-val" value="10" min="10" step="10"
+                            data-action="validate-qty-detail">
+                        <div class="pd-qty-btn" data-action="mod-qty-detail" data-amount="10" style="cursor:pointer;">+</div>
+                    </div>
+                    <button class="pd-add-btn" data-action="add-from-detail" style="cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 448 512" fill="currentColor"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg> <span
+                            data-key="add_to_list">LİSTEYE EKLE</span></button>
+                </div>
+            </div>
+        </div>
+        <!-- Related Products -->
+        <div class="related-sec" id="related-sec">
+            <div class="related-head" data-key="related_head">Önerilen Ürünler</div>
+            <div style="position:relative">
+                <div class="nav-btn r-prev" style="left:-60px"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 320 512" fill="currentColor"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L67.9 256 246.6 77.3c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg></div>
+                <div class="nav-btn r-next" style="right:-60px"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 320 512" fill="currentColor"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L252.1 256 73.4 77.3c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></div>
+                <div class="swiper related-swiper">
+                    <div class="swiper-wrapper" id="related-track"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OTHER VIEWS: Safety, RESTORED About Us, Contact -->
+    <div id="safety-docs-view" class="page-view"><h1 style="font-family:var(--font-head); font-size:3rem; margin-bottom:30px;" data-key="tech_docs">Teknik
+            Belgeler</h1>
+        <img src="https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png"
+            style="height:400px; margin-bottom:30px;">
+        <ul style="margin:20px; font-size:1.1rem; line-height:2;">
+            <li>EN ISO 20345:2011 Belgesi</li>
+            <li data-key="doc_anti">Antistatik Test Raporu</li>
+        </ul>
+        <button class="info-link" data-nav="home" style="cursor:pointer;" data-key="back_home">← ANA SAYFAYA DÖN</button>
+    </div>
+
+    <!-- RESTORED ABOUT US VIEW (FULL TEXT HARDCODED) -->
+    <div id="about-view" class="page-view">
+        <div class="page-content" style="max-width:900px; margin:0 auto;">
+            <h1 style="font-family:var(--font-head); font-size:3rem; margin-bottom:30px; text-align:center;"
+                data-key="about_main_title">Geçmişin Ustalığı, Geleceğin Adımları: Fine Ayakkabıcılık</h1>
+
+            <p data-key="about_p1">Fine Ayakkabıcılık A.Ş. olarak, ayakkabı sektöründeki yolculuğumuza kalite, güven ve
+                yerli üretim vizyonuyla başladık. Kuruluşumuzdan bugüne, özellikle hakiki deri işleme sanatını modern
+                üretim teknikleriyle birleştirerek; estetik, konfor ve dayanıklılığı bir arada sunan koleksiyonlara imza
+                atıyoruz.</p>
+            <p data-key="about_p2">Bizim için bir ayakkabı üretmek, yalnızca bir tasarım süreci değil; titiz işçilikle
+                örülen bir kalite vaadidir. Yerli üretimin gücünü, küresel standartlardaki inovasyonla harmanlayarak her
+                adımda mükemmeli hedefliyoruz.</p>
+
+            <h3 data-key="mission_vision_title">Misyon ve Vizyon</h3>
+            <p><strong data-key="mission_label">Misyonumuz:</strong> <span data-key="mission_text">Üstün işçilik
+                    anlayışımızı ve yüksek kalite standartlarımızı her bir ürünümüze yansıtarak, müşteri memnuniyetini
+                    en üst seviyede tutmak; yerli üretim gücümüzle sektöre ilham veren, yenilikçi tasarımlar
+                    sunmaktır.</span></p>
+            <p><strong data-key="vision_label">Vizyonumuz:</strong> <span data-key="vision_text">Estetik ve
+                    fonksiyonelliği kusursuz bir dengede buluşturan tasarımlarımızla, kullanıcılarımızın yaşam
+                    kalitesine değer katan ve sektöründe inovasyonun öncüsü olan lider bir marka konumunu
+                    pekiştirmektir.</span></p>
+
+            <h3 data-key="values_title">Bizi Biz Yapan Değerlerimiz</h3>
+            <p><strong data-key="val1_label">Sarsılmaz Güven:</strong> <span data-key="val1_text">Ürünlerimizde
+                    dayanıklılığı garanti ediyor, müşterilerimizle kurduğumuz bağı şeffaflık ve kalite üzerine inşa
+                    ediyoruz.</span></p>
+            <p><strong data-key="val2_label">Kurumsal Etik:</strong> <span data-key="val2_text">İş süreçlerimizin
+                    tamamında doğruluk ve profesyonel disiplini esas alarak, kurumsal kimliğimizi etik değerlerle
+                    besliyoruz.</span></p>
+            <p><strong data-key="val3_label">Sürekli Yenilik:</strong> <span data-key="val3_text">Geleneksel el
+                    işçiliğinin ruhuna sadık kalarak, modern tasarım trendlerini ve gelişen teknolojileri ürünlerimize
+                    entegre ediyoruz.</span></p>
+            <p><strong data-key="val4_label">Yerli Üretim Tutkusu:</strong> <span data-key="val4_text">Üretim gücümüzü
+                    bu topraklardan alıyor, ülkemizin ekonomik ve kültürel değerlerine katkı sağlamayı bir sorumluluk
+                    biliyoruz.</span></p>
+
+            <p style="margin-top:40px; font-weight:500;" data-key="about_closing">Fine Ayakkabıcılık A.Ş. olarak,
+                profesyonel çalışma anlayışımız ve tüm paydaşlarımızla kurduğumuz güçlü bağlarla; geleceğin adımlarını
+                bugünden atmaya devam ediyoruz.</p>
+            <div style="text-align:center; margin-top:50px;"><button class="info-link" data-nav="home" style="cursor:pointer;"
+                    data-key="back_home">← ANA SAYFAYA DÖN</button></div>
+        </div>
+    </div>
+
+    <!-- CONTACT VIEW -->
+    <div id="contact-view" class="page-view">
+        <div class="page-content" style="max-width:1200px; margin:0 auto;">
+            <h1 style="font-family:var(--font-head); font-size:3rem; margin-bottom:30px;" data-key="nav_contact">
+                İletişim</h1>
+            <div class="contact-split">
+                <div class="c-info">
+                    <div style="margin-bottom:25px;"><img
+                            class="logo-img" src="https://static.wixstatic.com/media/e8a500_77865bdec51246c787e11177863f8533~mv2.png"
+                            style="height:80px; width:auto; display:block;"></div>
+                    <p style="font-size:1.1rem; color:#555;">Eyüp Sultan Mah. Mehmet Akif Cad.<br>No:19-21/A Sancaktepe,
+                        İstanbul 34885</p>
+                    <p style="font-size:1.1rem; color:#555; margin-top:20px;">
+                        <strong>Telefon:</strong> +90 554 128 25 28<br>
+                        <strong>E-posta:</strong> info@fineayakkabicilik.com.tr
+                    </p>
+                    <div style="display:flex; gap:15px; margin-top:20px;">
+                        <a href="https://wa.me/905541282528" class="whatsapp-btn"
+                            style="flex:1; text-align:center; display:inline-block;"><svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                            WhatsApp</a>
+                        
+                    </div>
+                </div>
+                <div class="c-form">
+                    <h3 style="margin-top:0; font-family:var(--font-head);" data-key="contact_us">Bize Ulaşın</h3>
+                    <p style="margin-bottom:20px; font-size:0.95rem; color:#666;" data-key="contact_intro">Aşağıdaki
+                        formu doldurarak ürünlerimiz hakkında bilgi alabilir, toptan sipariş taleplerinizi
+                        iletebilirsiniz.</p>
+                    <form id="contact-form">
+                        <div class="form-row"><input id="c-name" class="inp" placeholder="Adınız Soyadınız"
+                                data-key="form_name" required></div>
+                        <div class="form-row"><input id="c-firm" class="inp" placeholder="Firma Adı"
+                                data-key="form_company">
+                        </div>
+                        <div class="form-row"><input id="c-email" type="email" class="inp" placeholder="E-posta Adresi"
+                                data-key="form_email" required></div>
+                        <div class="form-row"><textarea id="c-msg" class="inp"
+                                placeholder="Mesajınız... (Model kodu, adet vb.)" data-key="form_message"
+                                required></textarea></div>
+                        <div class="form-row"><button type="submit" class="cta-btn" data-key="form_send">GÖNDER</button>
+                        </div>
+
+                        <div class="kvkk-check-row">
+                            <input type="checkbox" required id="kvkk-consent-contact">
+                            <label for="kvkk-consent-contact">
+                                <label for="kvkk-consent-contact">
+                                    Kişisel verilerimin <a class="kvkk-link" href="kvkk.html">Aydınlatma
+                                        Metni</a> ve <a class="kvkk-link" href="privacy.html">Gizlilik
+                                        Politikası</a> kapsamında işlenmesini onaylıyorum.
+                                </label>
+                        </div>
+
+                        <button class="submit-btn" style="width:auto; min-width:150px;"
+                            data-key="send_btn">GÖNDER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIVACY POLICY VIEW -->
+    <div id="policy-view" class="page-view">
+        <div class="page-content" style="max-width:900px; margin:0 auto; padding:40px 20px;">
+            <h1 style="font-family:var(--font-head); font-size:2.5rem; margin-bottom:30px;">Mağaza Politikaları</h1>
+            
+            <div style="margin-bottom:40px;">
+                <h3 style="border-bottom:1px solid #ccc; padding-bottom:10px;">Gizlilik ve Güvenlik</h3>
+                <p>Fine Ayakkabıcılık olarak kişisel verilerinizin güvenliğine önem veriyoruz. 6698 sayılı KVKK kapsamında verileriniz sadece sipariş işleme ve yasal zorunluluklar için kullanılır.</p>
+            </div>
+
+            <div style="margin-bottom:40px;">
+                <h3 style="border-bottom:1px solid #ccc; padding-bottom:10px;">İade ve Değişim</h3>
+                <p>Üretim hatası olan ürünlerde 14 gün içinde koşulsuz iade ve değişim garantisi sunuyoruz. Kullanılmış veya hasar görmüş ürünler (üretim hatası dışında) iade alınmamaktadır.</p>
+            </div>
+
+            <div style="margin-bottom:40px;">
+                <h3 style="border-bottom:1px solid #ccc; padding-bottom:10px;">Çerez Politikası</h3>
+                <p>Sitemizde kullanıcı deneyimini iyileştirmek için zorunlu ve analitik çerezler kullanılmaktadır. Tarayıcı ayarlarınızdan çerezleri yönetebilirsiniz.</p>
+            </div>
+
+            <div style="text-align:center; margin-top:50px;">
+                <button class="info-link" data-nav="home" style="cursor:pointer;" data-key="back_home">← ANA SAYFAYA DÖN</button>
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCTS VIEW (NEW separate view) -->
+    <div id="products-view" class="page-view">
+        <div class="page-content" style="max-width:1400px; margin:0 auto;">
+            <h1 style="font-family:var(--font-head); font-size:3rem; margin-bottom:10px; text-align:center;">
+                Koleksiyonumuz</h1>
+            <p style="text-align:center; color:#666; margin-bottom:40px;">Zanaatkarlık ve teknolojinin buluştuğu nokta.
+            </p>
+
+            <!-- Category Filter Buttons for Products View (Minimalist Tabs) -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-action="filter-products" data-category="all" style="cursor:pointer;">Tümü</button>
+                <button class="filter-tab" data-action="filter-products" data-category="classic" style="cursor:pointer;">Klasik</button>
+                <button class="filter-tab" data-action="filter-products" data-category="winter" style="cursor:pointer;">Kışlık</button>
+                <button class="filter-tab" data-action="filter-products" data-category="summer" style="cursor:pointer;">Yazlık</button>
+            </div>
+
+            <div class="prod-sec" style="padding:0;">
+                <div id="p-track-full" class="prod-grid-full">
+                    <!-- Content rendered via JS -->
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:50px;"><button class="info-link" data-nav="home" style="cursor:pointer;"
+                data-key="back_home">← ANA SAYFAYA DÖN</button></div>
+    </div>
+    </div>
+
+    <footer id="footer">
+        <div class="f-grid">
+            <div>
+                <div class="f-head"><img
+                        class="logo-img" src="https://static.wixstatic.com/media/e8a500_77865bdec51246c787e11177863f8533~mv2.png"
+                        style="max-width:250px;"></div>
+                <div class="f-text">Eyüp Sultan Mah. Mehmet Akif Cad.<br>No:19-21/A Sancaktepe, İstanbul
+                    34885<br><br>Pazartesi-Cuma : 08.30-18.00</div>
+            </div>
+            <div>
+                <div class="f-head" data-key="corp_head">KURUMSAL</div><a class="f-link" data-nav="about" style="cursor:pointer;"
+                    data-key="nav_about">Hakkımızda</a>
+                <a class="f-link" data-nav="contact" style="cursor:pointer;" data-key="nav_contact">İletişim</a>
+            </div>
+            <div>
+                <div class="f-head" data-key="legal_head">YASAL</div>
+                <a class="f-link" data-nav="policy" style="cursor:pointer;">Mağaza Politikası</a>
+                <a class="f-link" data-nav="policy" style="cursor:pointer;">Çerez Politikası</a>
+                <a class="f-link" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>
+            </div>
+            <div>
+                <div class="f-head" data-key="contact_head">İLETİŞİM</div>
+                <div class="f-text">Tel: +90 (554) 128 25 28<br>E-posta: info@fineayakkabicilik.com.tr</div>
+            </div>
+        </div>
+    </footer>
+
+
+    </div>
+
+    <!-- COOKIE SETTINGS MODAL -->
+    <div id="cookie-settings-modal" class="modal">
+        <div class="m-box" style="max-width:600px;">
+            <span class="close-m" data-action="toggle-cookie-settings" style="cursor:pointer;">&times;</span>
+            <h2 style="font-family:var(--font-head);">Çerez Ayarları</h2>
+            <p style="color:#666; margin-bottom:20px; font-size:0.9rem;">Web sitemizin düzgün çalışması için zorunlu
+                çerezleri kullanıyoruz. Diğer çerezleri ise deneyiminizi geliştirmek için tercihlerinize
+                bırakıyoruz.
+            </p>
+
+            <div class="cookie-option-row">
+                <div>
+                    <strong>Zorunlu Çerezler</strong><br>
+                    <span style="font-size:0.8rem; color:#888;">Sitenin çalışması için gereklidir.</span>
+                </div>
+                <input type="checkbox" checked disabled>
+            </div>
+
+            <div class="cookie-option-row">
+                <div>
+                    <strong>Analitik Çerezler</strong><br>
+                    <span style="font-size:0.8rem; color:#888;">Ziyaretçi sayısını ve trafiği ölçmemizi
+                        sağlar.</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="cookie-analytic">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <div class="cookie-option-row">
+                <div>
+                    <strong>Pazarlama Çerezleri</strong><br>
+                    <span style="font-size:0.8rem; color:#888;">İlgi alanlarınıza göre reklamlar sunar.</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="cookie-marketing">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <button class="submit-btn" data-action="save-cookie-settings" style="cursor:pointer;" style="margin-top:20px;">AYARLARI
+                KAYDET</button>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="success-modal" class="modal">
+        <div class="m-box" style="text-align:center; padding:40px;">
+            <div style="font-size:3rem; color:#0f0; margin-bottom:20px;"><i class="fas fa-check-circle"></i></div>
+            <h2 style="font-family:var(--font-head); margin-bottom:15px;">Talebiniz Alındı!</h2>
+            <p style="color:#666; font-size:1.1rem;">İsteğiniz / Teklifiniz başarıyla tarafımıza ulaşmıştır. 2 iş
+                günü
+                içerisinde size e-posta yoluyla dönüş yapılacaktır.</p>
+            <button class="submit-btn" data-action="close-success"
+                style="margin-top:30px; background:#333; cursor:pointer;">TAMAM</button>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="m-box"><span class="close-m" data-action="toggle-cart" style="cursor:pointer;">&times;</span>
+            <h2 data-key="quote_req">Teklif İsteği</h2>
+            <div id="cart-list" style="margin:20px 0; border-bottom:1px solid #eee;"></div>
+            <form id="quote-form">
+                <div class="form-row"><input class="inp" placeholder="Firma Adı" data-key="form_company" required></div>
+                <div class="form-row"><input class="inp" placeholder="Yetkili İsim" data-key="form_name" required></div>
+                <div class="form-row"><input type="tel" class="inp" placeholder="Telefon" data-key="form_phone"
+                        required></div>
+
+                <div class="kvkk-check-row">
+                    <input type="checkbox" required id="kvkk-consent">
+                    <label for="kvkk-consent">
+                        Kişisel verilerimin <a class="kvkk-link" href="kvkk.html">Aydınlatma
+                            Metni</a> ve <a class="kvkk-link" href="privacy.html">Gizlilik
+                            Politikası</a>
+                        kapsamında işlenmesini onaylıyorum.
+                    </label>
+                </div>
+
+                <button class="submit-btn" data-key="send_btn">GÖNDER</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- COOKIE BANNER HTML -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cb-content">
+            <div class="cb-text">
+                <strong>Çerez Tercihleriniz:</strong> Sitemizde deneyimi iyileştirmek için çerezler kullanıyoruz.
+                "Tümünü Kabul Et" diyerek analitik ve pazarlama çerezlerine onay verebilirsiniz.
+                Detaylar için <a class="kvkk-link" href="cookie.html">Çerez Politikası</a>'nı
+                inceleyiniz.
+            </div>
+            <div class="cb-btns">
+                <button class="cb-btn" data-action="cookie-choice" data-choice="reject" style="cursor:pointer;">Reddet</button>
+                <button class="cb-btn" data-action="cookie-choice" data-choice="settings" style="cursor:pointer;">Ayarlar</button>
+                <button class="cb-btn accept" data-action="cookie-choice" data-choice="accept" style="cursor:pointer;">Tümünü Kabul Et</button>
+            </div>
+        </div>
+    </div>
+
+    
+        </div>
+    <!-- External Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <script>
+        // Initialize globals
+        window.products = [];
+        window.cart = [];
+        window.curLang = 'tr';
+        window.langData = {};
+        
+        // Notify Wix Velo that iframe is ready
+        window.onload = function() {
+            window.parent.postMessage({ type: 'iframe_ready' }, '*');
+            initializeSite();
+        };
+
+        // Wix REST API ile ürün çek (Velo yoksa doğrudan çalışır)
+        async function fetchWixProducts() {
+            try {
+                // Wix Stores REST API — Public endpoint
+                // SiteID'nizi aşağıya yazın (Wix Dashboard > Settings > Site ID)
+                const SITE_ID = 'WIX_SITE_ID';
+                const url = 'https://www.wixapis.com/stores/v1/products/query';
+
+                // Önce postMessage yoluyla Velo'dan geldi mi kontrol et
+                // (zaten window.onmessage ile geliyor, bu fallback)
+                if (window.products && window.products.length > 0) return;
+
+                const resp = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'wix-site-id': SITE_ID
+                    },
+                    body: JSON.stringify({ query: { paging: { limit: 100 } } })
+                });
+                if (!resp.ok) return;
+                const data = await resp.json();
+                if (!data.products || data.products.length === 0) return;
+
+                window.products = data.products.map(p => ({
+                    id:       p.id,
+                    name:     p.name,
+                    desc:     p.description || '',
+                    img:      p.media && p.media.mainMedia ? (p.media.mainMedia.image ? p.media.mainMedia.image.url : '') : '',
+                    gallery:  p.media && p.media.items ? p.media.items.map(m => m.image ? m.image.url : '').filter(Boolean) : [],
+                    feats:    p.additionalInfoSections ? p.additionalInfoSections.map(s => s.title + ': ' + s.description) : [],
+                    price:    p.price ? p.price.price : 0,
+                    sku:      p.sku || '',
+                    category: p.productType || 'all'
+                }));
+                renderProducts();
+            } catch(e) {
+                console.log('Wix API fetch skipped:', e.message);
+            }
+        }
+        
+        // Receive messages from Wix Velo
+        window.onmessage = function(event) {
+            if (!event.data) return;
+            // Product array from Wix Velo
+            if (Array.isArray(event.data)) {
+                window.products = event.data;
+                renderProducts();
+                return;
+            }
+            // Typed messages
+            if (event.data && event.data.type === 'products') {
+                window.products = event.data.items || [];
+                renderProducts();
+                return;
+            }
+            if (event.data.type === 'add_to_header_cart') {
+                // Wix cart updated — nothing needed locally
+            }
+        };
+        
+        // Main initialization function - will be filled below
+        function initializeSite() {
+            // This will be called after DOM is ready
+            setTimeout(loadAssets, 100);
+            setTimeout(initLogic, 500);
+        }
+        
+        // Load external assets
+        function loadAssets() {
+            const link = (h) => {
+                const l = document.createElement('link');
+                l.rel = 'stylesheet';
+                l.href = h;
+                document.head.appendChild(l);
+            };
+            const script = (s) => {
+                const sc = document.createElement('script');
+                sc.src = s;
+                document.body.appendChild(sc);
+            };
+            
+            // Already loaded via HTML head, but keeping for compatibility
+            // link('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+            // link('https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css');
+            // script('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js');
+            // script('https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js');
+        }
+        
+        // Initialize language data
+        function initLanguageData() {
+            window.langData = {
+                tr: {
+                    nav_home: "Anasayfa", nav_products: "Ürünler", nav_about: "Hakkımızda", nav_contact: "İletişim",
+                    hero_l1: "ZAMANSIZ", hero_l2: "ŞIKLIK", quote_btn: "TEKLİF LİSTESİ", all_products: "Tüm Ürünler",
+                    add_btn: "EKLE", features_head: "Ürün Özellikleri", add_to_list: "LİSTEYE EKLE", related_head: "Önerilen Ürünler",
+                    safe_main_title: "Profesyonel Çelik Burunlu Ziyaretçi Çarığı",
+                    safe_subtitle: "Saha Koruma Çözümü",
+                    safety_text: "İş sağlığı ve güvenliği standartlarına (EN ISO 20345) tam uyumlu, CE belgeli profesyonel koruma. Misafirleriniz ve saha personeliniz için anında, pratik ve güvenilir çözüm.",
+                    info_link: "BİLGİ AL & BELGELER →", about_title: "Hakkımızda",
+                    about_teaser: "Kaliteye Atılan Güvenli Bir Adım.",
+                    corp_intro: "KURUMSAL TANITIM →", tech_docs: "Teknik Belgeler", doc_anti: "Antistatik Test Raporu", back_home: "← ANA SAYFAYA DÖN",
+                    about_main_title: "Geçmişin Ustalığı, Geleceğin Adımları: Fine Ayakkabıcılık",
+                    contact_us: "Bize Ulaşın", contact_intro: "Aşağıdaki formu doldurarak ürünlerimiz hakkında bilgi alabilir, toptan sipariş taleplerinizi iletebilirsiniz.",
+                    form_name: "Adınız Soyadınız", form_company: "Firma Adı", form_email: "E-posta Adresi", form_phone: "Telefon Numarası",
+                    form_message: "Mesajınız...", form_send: "GÖNDER", quote_req: "Teklif İsteği",
+                    corp_head: "KURUMSAL", legal_head: "YASAL", contact_head: "İLETİŞİM"
+                },
+                en: {
+                    nav_home: "Home", nav_products: "Products", nav_about: "About Us", nav_contact: "Contact",
+                    hero_l1: "TIMELESS", hero_l2: "ELEGANCE", quote_btn: "QUOTE LIST", all_products: "All Products",
+                    add_btn: "ADD", features_head: "Product Features", add_to_list: "ADD TO LIST", related_head: "Recommended Products",
+                    safe_main_title: "Professional Steel Toe Visitor Overshoe",
+                    safe_subtitle: "Field Protection Solution",
+                    safety_text: "Professional visitor series fully compliant with OHS standards (EN ISO 20345) and CE certified.",
+                    info_link: "INFO & DOCS →", about_title: "About Us",
+                    about_teaser: "A Safe Step into Quality.",
+                    corp_intro: "CORPORATE INTRO →", tech_docs: "Technical Documents", doc_anti: "Antistatic Test Report", back_home: "← RETURN TO HOME",
+                    about_main_title: "Mastery of the Past, Steps of the Future: Fine Footwear",
+                    contact_us: "Contact Us", contact_intro: "Fill out the form below.",
+                    form_name: "Full Name", form_company: "Company Name", form_email: "Email Address", form_phone: "Phone Number",
+                    form_message: "Your message...", form_send: "SEND", quote_req: "Request Quote",
+                    corp_head: "CORPORATE", legal_head: "LEGAL", contact_head: "CONTACT"
+                }
+            };
+        }
+        
+        // Placeholder for initLogic - will be implemented with full methods
+        function initLogic() {
+            console.log("Initializing Logic...");
+            
+            const wrapper = document.getElementById('wrapper');
+            if (wrapper) {
+                wrapper.style.opacity = '1';
+                wrapper.style.visibility = 'visible';
+            }
+            
+            try {
+                const gsap = window.gsap;
+                const Swiper = window.Swiper;
+                
+                // Initialize language data
+                initLanguageData();
+                setLang(window.curLang || 'tr');
+                
+                // Loading Cart
+                loadCart();
+                
+                // Init GSAP animations
+                if (gsap) {
+                    gsap.from(".hero-title span", { duration: 1.5, y: 50, opacity: 0, stagger: 0.2, ease: "power4.out" });
+                }
+                
+                // Init Swiper (initial — re-init happens in renderProducts when data arrives)
+                setTimeout(() => {
+                    renderProducts();
+                    initSwipers();
+                }, 500);
+                
+                // Add Scroll Listener
+                window.addEventListener('scroll', () => {
+                    const h = document.getElementById('main-header');
+                    if (h && !h.classList.contains('forced-solid')) {
+                        if (window.scrollY > 10) h.classList.add('scrolled');
+                        else h.classList.remove('scrolled');
+                    }
+                });
+                
+                // Language switch listeners
+                setTimeout(() => {
+                    const enBtn = document.getElementById('lang-en');
+                    const trBtn = document.getElementById('lang-tr');
+                    if (enBtn) enBtn.onclick = () => setLang('en');
+                    if (trBtn) trBtn.onclick = () => setLang('tr');
+                }, 1000);
+                
+                // Event delegation for navigation
+                document.querySelectorAll('[data-nav]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const view = el.getAttribute('data-nav');
+                        go(view);
+                    });
+                });
+                
+                // Cart toggle
+                document.querySelectorAll('[data-action="toggle-cart"]').forEach(el => {
+                    el.addEventListener('click', () => toggleCart());
+                });
+                
+                // Search toggle
+                document.querySelectorAll('[data-action="toggle-search"]').forEach(el => {
+                    el.addEventListener('click', () => toggleSearch());
+                });
+                
+                // Product add buttons
+                document.addEventListener('click', (e) => {
+                    const addBtn = e.target.closest('[data-action="add-product"]');
+                    if (addBtn) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const productId = addBtn.getAttribute('data-product-id');
+                        if (productId) add(productId);
+                        return;
+                    }
+                    
+                    const detailBtn = e.target.closest('[data-action="open-detail"]');
+                    if (detailBtn) {
+                        const productId = detailBtn.getAttribute('data-product-id');
+                        if (productId) openDetail(productId);
+                    }
+                    
+                    const removeBtn = e.target.closest('[data-action="remove-item"]');
+                    if (removeBtn) {
+                        const idx = removeBtn.getAttribute('data-index');
+                        removeFromCart(idx);
+                    }
+                });
+                
+                // Quantity update
+                document.addEventListener('change', (e) => {
+                    const qtyInput = e.target.closest('[data-action="update-qty"]');
+                    if (qtyInput) {
+                        const idx = qtyInput.getAttribute('data-index');
+                        updateCartQty(idx, qtyInput.value);
+                    }
+                });
+                
+                // Cookie choices
+                document.querySelectorAll('[data-action="cookie-choice"]').forEach(el => {
+                    el.addEventListener('click', () => cookieChoice(el.getAttribute('data-choice')));
+                });
+                const cookieSettingsBtn = document.querySelector('[data-action="toggle-cookie-settings"]');
+                if (cookieSettingsBtn) cookieSettingsBtn.addEventListener('click', () => toggleCookieSettings(true));
+                const saveCookieBtn = document.querySelector('[data-action="save-cookie-settings"]');
+                if (saveCookieBtn) saveCookieBtn.addEventListener('click', () => saveCookieSettings());
+
+                // Contact / Quote forms
+                const contactForm = document.querySelector('#contact-form');
+                if (contactForm) contactForm.addEventListener('submit', e => sendContact(e));
+                const quoteForm = document.querySelector('#quote-form');
+                if (quoteForm) quoteForm.addEventListener('submit', e => sendQuote(e));
+
+                // Filter
+                document.querySelectorAll('[data-action="filter-products"]').forEach(el => {
+                    el.addEventListener('click', () => filterProducts(el.getAttribute('data-category'), el));
+                });
+
+                // Product detail actions (delegated)
+                document.addEventListener('click', (e) => {
+                    const addFromDetailBtn = e.target.closest('[data-action="add-from-detail"]');
+                    if (addFromDetailBtn) { addFromDetail(); return; }
+                    const modQty = e.target.closest('[data-action="mod-qty-detail"]');
+                    if (modQty) { modQtyDetail(parseInt(modQty.getAttribute('data-amount'))); return; }
+                    const closeSuccess = e.target.closest('[data-action="close-success"]');
+                    if (closeSuccess) { const m = document.getElementById('success-modal'); if (m) m.classList.remove('open'); }
+                });
+                document.addEventListener('change', (e) => {
+                    const valQty = e.target.closest('[data-action="validate-qty-detail"]');
+                    if (valQty) validateQtyDetail(valQty);
+                });
+
+                // Cookie banner: show if no consent
+                const consent = localStorage.getItem('cookieConsent');
+                if (!consent) { const b = document.getElementById('cookie-banner'); if (b) b.classList.add('show'); }
+
+                console.log('Event delegation system initialized');
+
+            } catch (e) {
+                console.error("initLogic error:", e);
+            }
+        }
+        
+        function initSwipers() {
+            const Swiper = window.Swiper;
+            if (!Swiper) return;
+
+            // Ana sayfa slider (3 sütun, ok tuşları)
+            if (window.homeSwiper) { try { window.homeSwiper.destroy(true, true); } catch(e){} }
+            window.homeSwiper = new Swiper('#home-swiper', {
+                slidesPerView: 3,
+                spaceBetween: 28,
+                loop: false,
+                navigation: { nextEl: '#home-next', prevEl: '#home-prev' },
+                breakpoints: {
+                    0:   { slidesPerView: 1, spaceBetween: 16 },
+                    480: { slidesPerView: 2, spaceBetween: 16 },
+                    900: { slidesPerView: 3, spaceBetween: 28 }
+                }
+            });
+
+            // İlgili ürünler slider
+            if (window.relSwiper) { try { window.relSwiper.destroy(true, true); } catch(e){} }
+            window.relSwiper = new Swiper('.related-swiper', {
+                slidesPerView: 1, spaceBetween: 20, loop: false,
+                navigation: { nextEl: '.r-next', prevEl: '.r-prev' },
+                breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 4 } }
+            });
+        }
+
+        function renderProducts() {
+            renderTrack('p-track', window.products, true);   // Ana sayfa: swiper slide
+            renderTrack('p-track-full', window.products, false); // Ürünler sayfası: grid
+            setTimeout(initSwipers, 100);
+        }
+
+        function renderTrack(trackId, list, isSlider) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
+            // p-track (ana sayfa swiper) her zaman swiper-slide wrapper kullanır
+            const useSlide = isSlider || trackId === 'p-track';
+            if (useSlide) {
+                track.innerHTML = list.map(p => `
+                    <div class="swiper-slide">
+                        <div class="p-card-minimal" data-action="open-detail" data-product-id="${p.id}" style="cursor:pointer;">
+                            <div class="p-img-box">
+                                <img src="${p.img || 'https://via.placeholder.com/300x300?text=Fine+Shoes'}" class="p-img" loading="lazy">
+                                <button class="p-ctx-btn" data-action="add-product" data-product-id="${p.id}">LİSTEYE EKLE (+10)</button>
+                            </div>
+                            <div class="p-title">${p.name}</div>
+                            ${p.price ? '<div style="text-align:center;padding:0 12px 12px;color:#888;font-size:0.9rem;">' + (typeof p.price === 'number' ? p.price.toFixed(2) + ' ₺' : p.price) + '</div>' : ''}
+                        </div>
+                    </div>`).join('');
+            } else {
+                track.innerHTML = list.map(p => `
+                    <div class="p-card-minimal" data-action="open-detail" data-product-id="${p.id}" style="cursor:pointer;">
+                        <div class="p-img-box">
+                            <img src="${p.img || 'https://via.placeholder.com/300x300?text=Fine+Shoes'}" class="p-img" loading="lazy">
+                            <button class="p-ctx-btn" data-action="add-product" data-product-id="${p.id}">LİSTEYE EKLE (+10)</button>
+                        </div>
+                        <div class="p-title">${p.name}</div>
+                        ${p.price ? '<div style="text-align:center;padding:0 12px 12px;color:#888;font-size:0.9rem;">' + (typeof p.price === 'number' ? p.price.toFixed(2) + ' ₺' : p.price) + '</div>' : ''}
+                    </div>`).join('');
+            }
+        }
+
+        function go(view) {
+            const h = document.getElementById('main-header');
+            const home = document.getElementById('home-view');
+            const homeExtras = document.getElementById('home-extras');
+            const pages = document.querySelectorAll('.page-view');
+
+            if (home) { home.classList.remove('active'); home.style.display = 'none'; }
+            if (homeExtras) { homeExtras.classList.remove('active'); homeExtras.style.display = 'none'; }
+            pages.forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
+
+            if (view === 'home') {
+                if (home) { home.classList.add('active'); home.style.display = 'block'; }
+                if (homeExtras) { homeExtras.classList.add('active'); homeExtras.style.display = 'block'; }
+                if (h) { h.classList.remove('forced-solid'); }
+            } else {
+                const target = document.getElementById(view + '-view');
+                if (target) { target.classList.add('active'); target.style.display = 'block'; }
+                if (h) h.classList.add('forced-solid');
+            }
+            const f = document.getElementById('footer');
+            if (f) f.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function openDetail(id) {
+            window.currentOpenId = id;
+            const p = window.products.find(x => x.id === id);
+            if (!p) return;
+
+            const mainImg = document.getElementById('pd-main-img');
+            if (mainImg) mainImg.src = p.img;
+            const title = document.getElementById('pd-title');
+            if (title) title.innerText = p.name;
+            const desc = document.getElementById('pd-desc');
+            if (desc) desc.innerText = p.desc || '';
+
+            const qtyEl = document.getElementById('pd-qty-val');
+            if (qtyEl) qtyEl.value = 10;
+
+            const ul = document.getElementById('pd-features-list');
+            if (ul) ul.innerHTML = p.feats ? p.feats.map(f => `<li>${f}</li>`).join('') : '';
+
+            const track = document.getElementById('pd-thumbs-track');
+            if (track) {
+                track.innerHTML = '';
+                const imgs = (p.gallery && p.gallery.length > 0) ? p.gallery : [p.img];
+                imgs.forEach((imgSrc, idx) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = `pd-thumb ${idx === 0 ? 'active' : ''}`;
+                    thumb.innerHTML = `<img src="${imgSrc}">`;
+                    thumb.onclick = () => {
+                        document.querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+                        thumb.classList.add('active');
+                        if (mainImg) mainImg.src = imgSrc;
+                    };
+                    track.appendChild(thumb);
+                });
+            }
+
+            const rt = document.getElementById('related-track');
+            if (rt) {
+                rt.innerHTML = window.products.filter(x => x.id !== id).map(r => `
+                    <div class="swiper-slide">
+                        <div class="p-card" data-action="open-detail" data-product-id="${r.id}" style="cursor:pointer;">
+                            <div class="p-img-box"><img src="${r.img}" class="p-img"></div>
+                            <div class="p-info-wrap"><div class="p-title">${r.name}</div></div>
+                        </div>
+                    </div>`).join('');
+            }
+            go('product');
+        }
+
+        function add(id, qtyOverride) {
+            const p = window.products.find(x => x.id == id);
+            if (!p) return;
+            let q = 10;
+            if (qtyOverride) { q = parseInt(qtyOverride); }
+            else { const inp = document.getElementById('qty-' + id); if (inp) q = parseInt(inp.value); }
+            if (isNaN(q) || q < 10) q = 10;
+            const exist = window.cart.find(x => x.id == id);
+            if (exist) exist.qty = parseInt(exist.qty) + q;
+            else window.cart.push({ ...p, qty: q });
+            saveCart();
+            updateBadge();
+            toggleCart(true);
+        }
+
+        function addFromDetail() {
+            const inp = document.getElementById('pd-qty-val');
+            const q = inp ? inp.value : 10;
+            if (window.currentOpenId) add(window.currentOpenId, q);
+        }
+
+        function modQtyDetail(val) {
+            const inp = document.getElementById('pd-qty-val');
+            if (!inp) return;
+            let v = parseInt(inp.value) + val;
+            if (v < 10) v = 10;
+            inp.value = v;
+        }
+
+        function validateQtyDetail(el) {
+            let v = parseInt(el.value);
+            if (isNaN(v) || v < 10) v = 10;
+            el.value = v;
+        }
+
+        function toggleCart(forceOpen) {
+            const m = document.getElementById('modal');
+            if (!m) return;
+            if (forceOpen) m.classList.add('open');
+            else m.classList.toggle('open');
+            if (m.classList.contains('open')) renderCart();
+        }
+
+        function renderCart() {
+            const l = document.getElementById('cart-list');
+            if (!l) return;
+            if (window.cart.length === 0) {
+                l.innerHTML = "<div style='padding:10px; text-align:center'>Liste boş</div>";
+                return;
+            }
+            l.innerHTML = window.cart.map((i, idx) => `
+                <div class="cart-row">
+                    <div style="flex:1"><b>${i.name}</b></div>
+                    <div class="cart-actions">
+                        <input type="number" value="${i.qty}" min="10" step="10" data-action="update-qty" data-index="${idx}">
+                        <span class="del-btn" data-action="remove-item" data-index="${idx}" style="cursor:pointer;"><i class="fas fa-trash"></i></span>
+                    </div>
+                </div>`).join('');
+        }
+
+        function updateCartQty(idx, val) {
+            let v = parseInt(val);
+            if (isNaN(v) || v < 10) v = 10;
+            window.cart[idx].qty = v;
+            saveCart();
+            renderCart();
+        }
+
+        function removeFromCart(idx) {
+            window.cart.splice(idx, 1);
+            saveCart();
+            updateBadge();
+            renderCart();
+        }
+
+        function updateBadge() {
+            const b = document.getElementById('badge');
+            if (b) b.innerText = window.cart.length;
+        }
+
+        function saveCart() { localStorage.setItem('fine_cart', JSON.stringify(window.cart)); }
+
+        function loadCart() {
+            const saved = localStorage.getItem('fine_cart');
+            if (saved) { try { window.cart = JSON.parse(saved); updateBadge(); } catch(e) {} }
+        }
+
+        function filterProducts(type, btn) {
+            if (btn) {
+                document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+            renderProducts();
+        }
+
+        function toggleSearch() { alert('Arama özelliği yakında eklenecektir.'); }
+
+        function setLang(lang) {
+            window.curLang = lang;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (window.langData[lang] && window.langData[lang][key]) {
+                    el.textContent = window.langData[lang][key];
+                }
+            });
+            const trBtn = document.getElementById('lang-tr');
+            const enBtn = document.getElementById('lang-en');
+            if (trBtn) trBtn.className = lang === 'tr' ? 'lang-active' : 'lang-passive';
+            if (enBtn) enBtn.className = lang === 'en' ? 'lang-active' : 'lang-passive';
+        }
+
+        function cookieChoice(type) {
+            if (type === 'settings') { toggleCookieSettings(true); return; }
+            if (type === 'accept') localStorage.setItem('cookieConsent', 'accepted');
+            else if (type === 'reject') localStorage.setItem('cookieConsent', 'rejected');
+            const b = document.getElementById('cookie-banner');
+            if (b) b.classList.remove('show');
+        }
+
+        function toggleCookieSettings(show) {
+            const m = document.getElementById('cookie-settings-modal');
+            if (!m) return;
+            if (show) m.classList.add('open'); else m.classList.remove('open');
+        }
+
+        function saveCookieSettings() {
+            const analytic = document.getElementById('cookie-analytic');
+            const marketing = document.getElementById('cookie-marketing');
+            localStorage.setItem('cookieConsent', 'custom');
+            localStorage.setItem('cookiePreferences', JSON.stringify({
+                necessary: true,
+                analytic: analytic ? analytic.checked : false,
+                marketing: marketing ? marketing.checked : false
+            }));
+            toggleCookieSettings(false);
+            const b = document.getElementById('cookie-banner');
+            if (b) b.classList.remove('show');
+        }
+
+        function sendContact(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('[type="submit"], .submit-btn');
+            const origText = btn ? btn.textContent : '';
+            if (btn) { btn.textContent = 'GÖNDERİLİYOR...'; btn.disabled = true; }
+            const name  = document.getElementById('c-name')  ? document.getElementById('c-name').value  : '';
+            const firm  = document.getElementById('c-firm')  ? document.getElementById('c-firm').value  : '';
+            const email = document.getElementById('c-email') ? document.getElementById('c-email').value : '';
+            const msg   = document.getElementById('c-msg')   ? document.getElementById('c-msg').value   : '';
+            emailjs.send('service_fineshoes', 'template_contact', {
+                from_name:    name,
+                company:      firm,
+                from_email:   email,
+                message:      msg,
+                to_email:     'info@fineayakkabicilik.com.tr'
+            }).then(function() {
+                const m = document.getElementById('success-modal');
+                if (m) m.classList.add('open');
+                e.target.reset();
+                if (btn) { btn.textContent = origText; btn.disabled = false; }
+            }, function(err) {
+                alert('Gönderim sırasında hata oluştu. Lütfen tekrar deneyiniz. (' + JSON.stringify(err) + ')');
+                if (btn) { btn.textContent = origText; btn.disabled = false; }
+            });
+        }
+
+        function sendQuote(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('[type="submit"], .submit-btn');
+            const origText = btn ? btn.textContent : '';
+            if (btn) { btn.textContent = 'GÖNDERİLİYOR...'; btn.disabled = true; }
+            const firm  = e.target.querySelector('[placeholder="Firma Adı"]') ? e.target.querySelector('[placeholder="Firma Adı"]').value : '';
+            const auth  = e.target.querySelector('[placeholder="Yetkili İsim"]') ? e.target.querySelector('[placeholder="Yetkili İsim"]').value : '';
+            const tel   = e.target.querySelector('[type="tel"]') ? e.target.querySelector('[type="tel"]').value : '';
+            const items = window.cart.map(i => i.name + ' × ' + i.qty + ' adet').join('\n');
+            emailjs.send('service_fineshoes', 'template_quote', {
+                company:      firm,
+                contact_name: auth,
+                phone:        tel,
+                cart_items:   items,
+                to_email:     'info@fineayakkabicilik.com.tr'
+            }).then(function() {
+                const m = document.getElementById('success-modal');
+                if (m) m.classList.add('open');
+                window.cart = [];
+                saveCart();
+                updateBadge();
+                const modal = document.getElementById('modal');
+                if (modal) modal.classList.remove('open');
+                e.target.reset();
+                if (btn) { btn.textContent = origText; btn.disabled = false; }
+            }, function(err) {
+                alert('Gönderim sırasında hata oluştu. Lütfen tekrar deneyiniz. (' + JSON.stringify(err) + ')');
+                if (btn) { btn.textContent = origText; btn.disabled = false; }
+            });
+        }
+
+        function toggleMobileMenu(open) {
+            const nav = document.getElementById('mobile-nav');
+            if (!nav) return;
+            if (open === undefined) open = !nav.classList.contains('open');
+            if (open) {
+                nav.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Mobil menüdeki nav linkleri için event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('#mobile-nav [data-nav]').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    const target = this.getAttribute('data-nav');
+                    if (target) navigateTo(target);
+                });
+            });
+            // badge-m senkronizasyonu
+            const obs = new MutationObserver(function() {
+                const b = document.getElementById('badge');
+                const bm = document.getElementById('badge-m');
+                if (b && bm) bm.textContent = b.textContent;
+            });
+            const badge = document.getElementById('badge');
+            if (badge) obs.observe(badge, { childList: true, characterData: true, subtree: true });
+        });
+
+        // Wix parent'a içerik yüksekliğini bildir (beyaz boşluk giderme)
+        function reportHeight() {
+            try {
+                var h = Math.max(
+                    document.body.scrollHeight,
+                    document.body.offsetHeight,
+                    document.documentElement.scrollHeight
+                );
+                if (h > 100 && window.parent !== window) {
+                    window.parent.postMessage({ type: 'wix-height', height: h }, '*');
+                }
+            } catch(e) {}
+        }
+        window.addEventListener('load', function() {
+            reportHeight();
+            setInterval(reportHeight, 800);
+        });
+
+    </script>
+</body>
+</html>
