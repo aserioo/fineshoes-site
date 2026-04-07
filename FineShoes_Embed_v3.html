@@ -785,70 +785,75 @@
         }
 
         .about-sec {
-            padding: 60px 5%;
-            background: #f9f9f9;
+            padding: 0;
+            background: #fff;
         }
 
         .about-sec-inner {
-            max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
             display: flex;
-            align-items: center;
-            gap: 60px;
-            border: 1px solid #eee;
-            background: #fff;
-            padding: 50px;
-        }
-
-        .about-sec-text {
-            flex: 1.2;
+            align-items: stretch;
+            gap: 0;
         }
 
         .about-sec-img {
             flex: 1;
-            min-width: 280px;
+            min-width: 0;
         }
 
         .about-sec-img img {
             width: 100%;
-            height: 340px;
+            height: 100%;
+            min-height: 420px;
             object-fit: cover;
             display: block;
+        }
+
+        .about-sec-text {
+            flex: 1;
+            background: #111;
+            color: #fff;
+            padding: 70px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .about-sec h2 {
             font-family: var(--font-head);
             font-size: 2.2rem;
             margin-bottom: 20px;
-            color: #111;
+            color: #fff;
         }
 
         .about-sec p {
             font-size: 1rem;
             line-height: 1.9;
-            color: #555;
+            color: #aaa;
         }
 
         .about-btn {
             margin-top: 30px;
             padding: 14px 36px;
-            border: 1px solid #000;
+            border: 1px solid #fff;
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 2px;
             transition: 0.3s;
             font-size: 0.82rem;
             display: inline-block;
-        }
-
-        .about-btn:hover {
-            background: #000;
             color: #fff;
         }
 
+        .about-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
         @media(max-width: 768px) {
-            .about-sec-inner { flex-direction: column; padding: 30px 20px; gap: 30px; }
-            .about-sec-img { min-width: unset; width: 100%; }
+            .about-sec-inner { flex-direction: column; }
+            .about-sec-img img { min-height: 280px; }
+            .about-sec-text { padding: 40px 30px; }
         }
 
         footer {
@@ -2059,13 +2064,13 @@
         </div>
         <div class="about-sec" id="about-sec">
             <div class="about-sec-inner">
+                <div class="about-sec-img">
+                    <img src="https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png" alt="Fine Ayakkabıcılık">
+                </div>
                 <div class="about-sec-text">
                     <h2 data-key="about_title">Hakkımızda</h2>
-                    <p data-key="about_teaser">Kaliteye Atılan Güvenli Bir Adım. Üretimden tasarıma, her aşamada yerli üretim ve üstün kalite prensibiyle hareket ediyoruz. Fine Ayakkabıcılık A.Ş., estetiği uzun ömürlü kullanım sözüyle birleştirerek ayaklarınıza hak ettiği konforu sunar.</p>
+                    <p data-key="about_teaser">1990'lardan bu yana ayakkabı sektöründe üretim yapan Fine Ayakkabıcılık, hakiki deri işleme geleneğini modern üretim teknikleriyle birleştiriyor. Klasik erkek ayakkabılarından EN ISO 20345 sertifikalı iş güvenliği ürünlerine uzanan geniş koleksiyonumuzla hem estetiği hem de güvenliği bir arada sunuyoruz. Türkiye'nin köklü imalatçılarından biri olarak her ürünümüzde yerli üretim kalitesi ve uzun ömürlü dayanıklılık ön planda.</p>
                     <button class="about-btn" data-nav="about" style="cursor:pointer;" data-key="corp_intro">KURUMSAL TANITIM →</button>
-                </div>
-                <div class="about-sec-img">
-                    <img src="https://static.wixstatic.com/media/e8a500_af5610572f0f41088f10da3f9d37c6d7~mv2.png" alt="Fine Ayakkabıcılık">
                 </div>
             </div>
         </div>
@@ -2828,7 +2833,7 @@
                     safe_subtitle: "Field Protection Solution",
                     safety_text: "Professional visitor series fully compliant with OHS standards (EN ISO 20345) and CE certified.",
                     info_link: "INFO & DOCS →", about_title: "About Us",
-                    about_teaser: "A Safe Step into Quality.",
+                    about_teaser: "Fine Footwear has been producing shoes since the 1990s, combining the tradition of genuine leather craftsmanship with modern manufacturing. From classic men's footwear to EN ISO 20345 certified safety shoes, we deliver quality, comfort and durability in every step.",
                     corp_intro: "CORPORATE INTRO →", tech_docs: "Technical Documents", doc_anti: "Antistatic Test Report", back_home: "← RETURN TO HOME",
                     about_main_title: "Mastery of the Past, Steps of the Future: Fine Footwear",
                     about_p1: "As Fine Footwear Ltd., we began our journey in the footwear industry with a vision of quality, trust, and domestic production. Since our establishment, we have been creating collections that combine the art of genuine leather processing with modern production techniques, delivering aesthetics, comfort, and durability.",
