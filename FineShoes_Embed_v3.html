@@ -2044,7 +2044,7 @@
             <div style="display:flex; flex-wrap:wrap; gap:40px; margin-bottom:50px; align-items:center;">
                 <!-- Left: Image -->
                 <div style="flex:1; min-width:300px;">
-                    <img src="https://static.wixstatic.com/media/e8a500_8916889f635642b2bc2cbfb94269ec25~mv2.png"
+                    <img src="https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png"
                         style="width:100%; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.1);">
                 </div>
                 <!-- Right: Info -->
@@ -2261,7 +2261,7 @@
             <div class="contact-split">
                 <div class="c-info">
                     <div style="margin-bottom:25px;"><img
-                            class="logo-img" src="https://static.wixstatic.com/media/e8a500_77865bdec51246c787e11177863f8533~mv2.png"
+                            class="logo-img" src="https://static.wixstatic.com/media/e8a500_1db1487f14954353956ebe905bc35811~mv2.png"
                             style="height:80px; width:auto; display:block;"></div>
                     <p style="font-size:1.1rem; color:#555;">Eyüp Sultan Mah. Mehmet Akif Cad.<br>No:19-21/A Sancaktepe,
                         İstanbul 34885</p>
@@ -2273,7 +2273,6 @@
                         <a href="https://wa.me/905541282528" class="whatsapp-btn"
                             style="flex:1; text-align:center; display:inline-block;"><svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
                             WhatsApp</a>
-                        
                     </div>
                 </div>
                 <div class="c-form">
@@ -2289,24 +2288,28 @@
                         </div>
                         <div class="form-row"><input id="c-email" type="email" class="inp" placeholder="E-posta Adresi"
                                 data-key="form_email" required></div>
+                        <div class="form-row"><input id="c-phone" type="tel" class="inp" placeholder="Telefon Numarası"
+                                pattern="[0-9\+\(\)\s-]+" data-key="form_phone" required></div>
                         <div class="form-row"><textarea id="c-msg" class="inp"
                                 placeholder="Mesajınız... (Model kodu, adet vb.)" data-key="form_message"
                                 required></textarea></div>
-                        <div class="form-row"><button type="submit" class="cta-btn" data-key="form_send">GÖNDER</button>
+
+                        <div class="kvkk-check-row">
+                            <input type="checkbox" required id="kvkk-enlightenment-contact">
+                            <label for="kvkk-enlightenment-contact">
+                                <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Aydınlatma Metni</a>'ni okudum ve onaylıyorum.
+                            </label>
                         </div>
 
                         <div class="kvkk-check-row">
-                            <input type="checkbox" required id="kvkk-consent-contact">
-                            <label for="kvkk-consent-contact">
-                                <label for="kvkk-consent-contact">
-                                    Kişisel verilerimin <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Aydınlatma
-                                        Metni</a> ve <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Gizlilik
-                                        Politikası</a> kapsamında işlenmesini onaylıyorum.
-                                </label>
+                            <input type="checkbox" required id="kvkk-privacy-contact">
+                            <label for="kvkk-privacy-contact">
+                                <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>'nı okudum ve onaylıyorum.
+                            </label>
                         </div>
 
-                        <button class="submit-btn" style="width:auto; min-width:150px;"
-                            data-key="send_btn">GÖNDER</button>
+                        <div class="form-row"><button type="submit" class="cta-btn" data-key="form_send">GÖNDER</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -2324,9 +2327,7 @@
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:50px; border-bottom:1px solid #eee; padding-bottom:20px;">
                 <a href="#kvkk" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">KVKK AYDINLATMA</a>
                 <a href="#gizlilik" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">GİZLİLİK POLİTİKASI</a>
-                <a href="#iade" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">İADE &amp; DEĞİŞİM</a>
                 <a href="#cerez" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">ÇEREZ POLİTİKASI</a>
-                <a href="#mesafeli" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">MESAFELİ SATIŞ</a>
             </div>
 
             <!-- ═══════════════ 1. KVKK ═══════════════ -->
@@ -2427,43 +2428,6 @@
                 <p style="margin-bottom:14px;">Gizlilik politikamıza ilişkin soru ve talepleriniz için: <strong>info@fineayakkabicilik.com.tr</strong></p>
             </div>
 
-            <!-- ═══════════════ 3. İADE ═══════════════ -->
-            <div id="iade" style="margin-bottom:60px; scroll-margin-top:80px;">
-                <h2 style="font-family:var(--font-head); font-size:1.7rem; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-bottom:24px;">3. İade ve Değişim Politikası</h2>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.1 Genel Koşullar</h3>
-                <p style="margin-bottom:14px;">Fine Ayakkabıcılık, 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği çerçevesinde müşteri haklarını eksiksiz sağlamayı taahhüt eder.</p>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.2 Cayma Hakkı</h3>
-                <p style="margin-bottom:14px;">Tüketiciler, herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin ürünü teslim aldıkları tarihten itibaren <strong>14 (on dört) gün</strong> içinde cayma hakkını kullanabilir. Cayma hakkı bildiriminin tarafımıza ulaşmasının ardından ürün iade gönderimi için 10 iş günü süre tanınır.</p>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.3 İade Koşulları</h3>
-                <ul style="padding-left:22px; margin-bottom:14px;">
-                    <li>Ürün kullanılmamış, yıkanmamış ve orijinal ambalajında olmalıdır.</li>
-                    <li>Ürünle birlikte gelen tüm aksesuar, etiket ve belgelerin eksiksiz iade edilmesi gerekmektedir.</li>
-                    <li>Üretim hatası kaynaklı iadeler için kargo ücreti firmamız tarafından karşılanır.</li>
-                    <li>Cayma hakkı kapsamındaki iadelerde kargo ücreti tüketiciye aittir.</li>
-                    <li>Giyilmiş, kullanım izleri veya koku içeren ürünler iade kabul edilmez.</li>
-                </ul>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.4 Cayma Hakkından Muaf Ürünler</h3>
-                <ul style="padding-left:22px; margin-bottom:14px;">
-                    <li>Müşteri talebi ve kişisel özelliklere göre üretilen (özel sipariş) ürünler</li>
-                    <li>Toplu (kurumsal) siparişlerde sözleşmede aksi kararlaştırılmadıkça standart cayma hakkı uygulanmaz</li>
-                    <li>Hijyen amacıyla koruyucu contası açılmış ürünler (varsa)</li>
-                </ul>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.5 Kusurlu Ürün</h3>
-                <p style="margin-bottom:14px;">Teslimde hasarlı veya ayıplı çıkan ürünler için teslimden itibaren 2 yıl süresince ayıp ihbar hakkı saklıdır. Ayıplı ürün tespitinde tüketici; onarım, değişim, bedel indirimi veya sözleşmeden dönme haklarından birini seçme hakkına sahiptir.</p>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.6 İade Süreci</h3>
-                <p style="margin-bottom:8px;">İade talebinizi başlatmak için:</p>
-                <ul style="padding-left:22px; margin-bottom:14px;">
-                    <li><strong>E-posta:</strong> info@fineayakkabicilik.com.tr (konu: İade Talebi – Sipariş No)</li>
-                    <li><strong>Telefon/WhatsApp:</strong> +90 554 128 25 28</li>
-                </ul>
-                <p style="margin-bottom:14px;">Onaylanan iadelerde ücret iadesi, ürünün depoya ulaşmasından itibaren <strong>14 iş günü</strong> içinde ödeme yönteminize iade edilir.</p>
-            </div>
 
             <!-- ═══════════════ 4. ÇEREZ ═══════════════ -->
             <div id="cerez" style="margin-bottom:60px; scroll-margin-top:80px;">
@@ -2515,32 +2479,6 @@
                 <p style="margin-bottom:14px;">Zorunlu olmayan çerezler için site girişinde açık rıza alınmaktadır. Rızanızı geri almak için tarayıcı çerezlerinizi temizleyebilir veya info@fineayakkabicilik.com.tr adresine başvurabilirsiniz.</p>
             </div>
 
-            <!-- ═══════════════ 5. MESAFELİ SATIŞ ═══════════════ -->
-            <div id="mesafeli" style="margin-bottom:60px; scroll-margin-top:80px;">
-                <h2 style="font-family:var(--font-head); font-size:1.7rem; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-bottom:24px;">5. Mesafeli Satış Sözleşmesi Ön Bilgilendirme</h2>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.1 Satıcı Bilgileri</h3>
-                <p style="margin-bottom:14px;"><strong>Unvan:</strong> Fine Ayakkabıcılık<br>
-                <strong>Adres:</strong> Türkiye<br>
-                <strong>E-posta:</strong> info@fineayakkabicilik.com.tr<br>
-                <strong>Telefon:</strong> +90 554 128 25 28<br>
-                <strong>Web:</strong> www.fineayakkabicilik.com.tr</p>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.2 Sözleşmenin Konusu</h3>
-                <p style="margin-bottom:14px;">Bu ön bilgilendirme metni, 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği kapsamında tüketicileri web sitesi üzerinden gerçekleştirilen alışverişler hakkında bilgilendirme amacıyla hazırlanmıştır.</p>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.3 Ürün ve Fiyat Bilgisi</h3>
-                <p style="margin-bottom:14px;">Ürünlere ait özellikler ve fiyatlar sipariş aşamasında tarafınıza iletilir. Fiyatlar KDV dahil Türk Lirası cinsindendir. Toplu ve kurumsal siparişlerde fiyat teklif bazlı belirlenir.</p>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.4 Teslimat</h3>
-                <p style="margin-bottom:14px;">Stokta hazır ürünler sipariş onayından itibaren <strong>3–7 iş günü</strong> içinde kargoya verilir. Özel sipariş ve toplu üretimlerde teslimat süresi sipariş aşamasında ayrıca bildirilir. Teslimat Türkiye genelinde anlaşmalı kargo firmaları aracılığıyla yapılır.</p>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.5 Ödeme Koşulları</h3>
-                <p style="margin-bottom:14px;">Kurumsal B2B siparişlerde ödeme koşulları sözleşme ile belirlenir. Perakende satışlarda sipariş onayı ile birlikte ödeme talep edilir. Havale/EFT ve kredi kartı ile ödeme kabul edilir.</p>
-
-                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.6 Uyuşmazlık Çözümü</h3>
-                <p style="margin-bottom:14px;">Tüketicilerle yaşanabilecek uyuşmazlıklarda öncelikle bilgi@fineayakkabicilik.com.tr adresi üzerinden çözüm aranacaktır. Çözüme kavuşturulamayan durumlarda; <strong>Tüketici Hakem Heyeti</strong> (yasal parasal sınırlar dahilinde) ve <strong>Tüketici Mahkemeleri</strong> yetkilidir. Şikâyetlerinizi aynı zamanda <strong>e-Devlet</strong> portalı üzerinden Tüketici Bilgi Sistemi'ne (TÜBİS) iletebilirsiniz.</p>
-            </div>
 
             <div style="text-align:center; margin-top:60px; padding-top:30px; border-top:1px solid #eee;">
                 <p style="color:#999; font-size:0.85rem; margin-bottom:20px;">Bu politikalar Fine Ayakkabıcılık tarafından yürürlükteki Türk mevzuatına uygun olarak hazırlanmıştır.</p>
@@ -2580,9 +2518,8 @@
             <div>
                 <div class="f-head"><img
                         class="logo-img" src="https://static.wixstatic.com/media/e8a500_77865bdec51246c787e11177863f8533~mv2.png"
-                        style="max-width:250px;"></div>
-                <div class="f-text">Eyüp Sultan Mah. Mehmet Akif Cad.<br>No:19-21/A Sancaktepe, İstanbul
-                    34885<br><br>Pazartesi-Cuma : 08.30-18.00</div>
+                        style="max-width:250px; margin-top: -10px;"></div>
+                <div class="f-text">Eyüp Sultan Mah. Mehmet Akif Cad.<br>No:19-21/A Sancaktepe, İstanbul 34885<br><br>Pazartesi-Cuma : 08.30-18.00</div>
             </div>
             <div>
                 <div class="f-head" data-key="corp_head">KURUMSAL</div><a class="f-link" data-nav="about" style="cursor:pointer;"
@@ -2597,7 +2534,7 @@
             </div>
             <div>
                 <div class="f-head" data-key="contact_head">İLETİŞİM</div>
-                <div class="f-text">Tel: +90 (554) 128 25 28<br>E-posta: info@fineayakkabicilik.com.tr</div>
+                <div class="f-text">Tel: +90 (554) 128 25 28<br>E-mail: info@fineayakkabicilik.com.tr</div>
             </div>
         </div>
     </footer>
@@ -2671,16 +2608,20 @@
             <form id="quote-form">
                 <div class="form-row"><input class="inp" placeholder="Firma Adı" data-key="form_company" required></div>
                 <div class="form-row"><input class="inp" placeholder="Yetkili İsim" data-key="form_name" required></div>
-                <div class="form-row"><input type="tel" class="inp" placeholder="Telefon" data-key="form_phone"
+                <div class="form-row"><input type="tel" class="inp" placeholder="Telefon" pattern="[0-9\+\(\)\s-]+" data-key="form_phone"
                         required></div>
 
                 <div class="kvkk-check-row">
-                    <input type="checkbox" required id="kvkk-consent">
-                    <label for="kvkk-consent">
-                        Kişisel verilerimin <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Aydınlatma
-                            Metni</a> ve <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Gizlilik
-                            Politikası</a>
-                        kapsamında işlenmesini onaylıyorum.
+                    <input type="checkbox" required id="kvkk-enlightenment">
+                    <label for="kvkk-enlightenment">
+                        <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Aydınlatma Metni</a>'ni okudum ve onaylıyorum.
+                    </label>
+                </div>
+
+                <div class="kvkk-check-row">
+                    <input type="checkbox" required id="kvkk-privacy">
+                    <label for="kvkk-privacy">
+                        <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>'nı okudum ve onaylıyorum.
                     </label>
                 </div>
 
@@ -2695,7 +2636,7 @@
             <div class="cb-text">
                 <strong>Çerez Tercihleriniz:</strong> Sitemizde deneyimi iyileştirmek için çerezler kullanıyoruz.
                 "Tümünü Kabul Et" diyerek analitik ve pazarlama çerezlerine onay verebilirsiniz.
-                Detaylar için <a class="kvkk-link" href="cookie.html">Çerez Politikası</a>'nı
+                Detaylar için <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Çerez Politikası</a>'nı
                 inceleyiniz.
             </div>
             <div class="cb-btns">
@@ -2818,7 +2759,7 @@
         function initLanguageData() {
             window.langData = {
                 tr: {
-                    nav_home: "Anasayfa", nav_products: "Ürünler", nav_about: "Hakkımızda", nav_contact: "İletişim",
+                    nav_home: "Anasayfa", nav_products: "Ürünler", nav_about: "Hakkımızda", nav_contact: "İletişim", nav_safety: "İş Güvenliği",
                     hero_l1: "ZAMANSIZ", hero_l2: "ŞIKLIK", quote_btn: "TEKLİF LİSTESİ", all_products: "Tüm Ürünler",
                     add_btn: "EKLE", features_head: "Ürün Özellikleri", add_to_list: "LİSTEYE EKLE", related_head: "Önerilen Ürünler",
                     safe_main_title: "Profesyonel Çelik Burunlu Ziyaretçi Çarığı",
@@ -2828,13 +2769,24 @@
                     about_teaser: "Kaliteye Atılan Güvenli Bir Adım.",
                     corp_intro: "KURUMSAL TANITIM →", tech_docs: "Teknik Belgeler", doc_anti: "Antistatik Test Raporu", back_home: "← ANA SAYFAYA DÖN",
                     about_main_title: "Geçmişin Ustalığı, Geleceğin Adımları: Fine Ayakkabıcılık",
+                    about_p1: "Fine Ayakkabıcılık A.Ş. olarak, ayakkabı sektöründeki yolculuğumuza kalite, güven ve yerli üretim vizyonuyla başladık. Kuruluşumuzdan bugüne, özellikle hakiki deri işleme sanatını modern üretim teknikleriyle birleştirerek; estetik, konfor ve dayanıklılığı bir arada sunan koleksiyonlara imza atıyoruz.",
+                    about_p2: "Bizim için bir ayakkabı üretmek, yalnızca bir tasarım süreci değil; titiz işçilikle örülen bir kalite vaadidir. Yerli üretimin gücünü, küresel standartlardaki inovasyonla harmanlayarak her adımda mükemmeli hedefliyoruz.",
+                    mission_vision_title: "Misyon ve Vizyon",
+                    mission_label: "Misyonumuz:", mission_text: "Üstün işçilik anlayışımızı ve yüksek kalite standartlarımızı her bir ürünümüze yansıtarak, müşteri memnuniyetini en üst seviyede tutmak; yerli üretim gücümüzle sektöre ilham veren, yenilikçi tasarımlar sunmaktır.",
+                    vision_label: "Vizyonumuz:", vision_text: "Estetik ve fonksiyonelliği kusursuz bir dengede buluşturan tasarımlarımızla, kullanıcılarımızın yaşam kalitesine değer katan ve sektöründe inovasyonun öncüsü olan lider bir marka konumunu pekiştirmektir.",
+                    values_title: "Bizi Biz Yapan Değerlerimiz",
+                    val1_label: "Sarsılmaz Güven:", val1_text: "Ürünlerimizde dayanıklılığı garanti ediyor, müşterilerimizle kurduğumuz bağı şeffaflık ve kalite üzerine inşa ediyoruz.",
+                    val2_label: "Kurumsal Etik:", val2_text: "İş süreçlerimizin tamamında doğruluk ve profesyonel disiplini esas alarak, kurumsal kimliğimizi etik değerlerle besliyoruz.",
+                    val3_label: "Sürekli Yenilik:", val3_text: "Geleneksel el işçiliğinin ruhuna sadık kalarak, modern tasarım trendlerini ve gelişen teknolojileri ürünlerimize entegre ediyoruz.",
+                    val4_label: "Yerli Üretim Tutkusu:", val4_text: "Üretim gücümüzü bu topraklardan alıyor, ülkemizin ekonomik ve kültürel değerlerine katkı sağlamayı bir sorumluluk biliyoruz.",
+                    about_closing: "Fine Ayakkabıcılık A.Ş. olarak, profesyonel çalışma anlayışımız ve tüm paydaşlarımızla kurduğumuz güçlü bağlarla; geleceğin adımlarını bugünden atmaya devam ediyoruz.",
                     contact_us: "Bize Ulaşın", contact_intro: "Aşağıdaki formu doldurarak ürünlerimiz hakkında bilgi alabilir, toptan sipariş taleplerinizi iletebilirsiniz.",
                     form_name: "Adınız Soyadınız", form_company: "Firma Adı", form_email: "E-posta Adresi", form_phone: "Telefon Numarası",
                     form_message: "Mesajınız...", form_send: "GÖNDER", quote_req: "Teklif İsteği",
                     corp_head: "KURUMSAL", legal_head: "YASAL", contact_head: "İLETİŞİM"
                 },
                 en: {
-                    nav_home: "Home", nav_products: "Products", nav_about: "About Us", nav_contact: "Contact",
+                    nav_home: "Home", nav_products: "Products", nav_about: "About Us", nav_contact: "Contact", nav_safety: "Work Safety",
                     hero_l1: "TIMELESS", hero_l2: "ELEGANCE", quote_btn: "QUOTE LIST", all_products: "All Products",
                     add_btn: "ADD", features_head: "Product Features", add_to_list: "ADD TO LIST", related_head: "Recommended Products",
                     safe_main_title: "Professional Steel Toe Visitor Overshoe",
@@ -2844,7 +2796,18 @@
                     about_teaser: "A Safe Step into Quality.",
                     corp_intro: "CORPORATE INTRO →", tech_docs: "Technical Documents", doc_anti: "Antistatic Test Report", back_home: "← RETURN TO HOME",
                     about_main_title: "Mastery of the Past, Steps of the Future: Fine Footwear",
-                    contact_us: "Contact Us", contact_intro: "Fill out the form below.",
+                    about_p1: "As Fine Footwear Ltd., we began our journey in the footwear industry with a vision of quality, trust, and domestic production. Since our establishment, we have been creating collections that combine the art of genuine leather processing with modern production techniques, delivering aesthetics, comfort, and durability.",
+                    about_p2: "For us, producing a shoe is not merely a design process; it is a promise of quality woven with meticulous craftsmanship. By blending the strength of domestic production with global standards of innovation, we aim for excellence at every step.",
+                    mission_vision_title: "Mission and Vision",
+                    mission_label: "Our Mission:", mission_text: "To ensure customer satisfaction at the highest level by reflecting our superior craftsmanship and quality standards in every product; to offer innovative designs that inspire the industry with our domestic production capabilities.",
+                    vision_label: "Our Vision:", vision_text: "To solidify our position as a leading brand that enriches the lives of our users with designs that perfectly balance aesthetics and functionality, and to be a pioneer of innovation in our sector.",
+                    values_title: "Our Core Values",
+                    val1_label: "Unwavering Trust:", val1_text: "We guarantee durability in our products and build our relationships with customers on transparency and quality.",
+                    val2_label: "Corporate Ethics:", val2_text: "We uphold honesty and professional discipline in all our business processes, nourishing our corporate identity with ethical values.",
+                    val3_label: "Continuous Innovation:", val3_text: "We remain true to the spirit of traditional craftsmanship while integrating modern design trends and evolving technologies into our products.",
+                    val4_label: "Passion for Domestic Production:", val4_text: "We draw our production strength from these lands, viewing the contribution to our nation's economic and cultural values as our responsibility.",
+                    about_closing: "As Fine Footwear Ltd., we continue to take steps toward the future with our professional approach and the strong bonds we have built with all our stakeholders.",
+                    contact_us: "Contact Us", contact_intro: "Fill out the form below to request quotes and information about our products.",
                     form_name: "Full Name", form_company: "Company Name", form_email: "Email Address", form_phone: "Phone Number",
                     form_message: "Your message...", form_send: "SEND", quote_req: "Request Quote",
                     corp_head: "CORPORATE", legal_head: "LEGAL", contact_head: "CONTACT"
