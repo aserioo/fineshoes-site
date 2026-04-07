@@ -785,39 +785,70 @@
         }
 
         .about-sec {
-            padding: 80px 10%;
-            text-align: center;
+            padding: 60px 5%;
+            background: #f9f9f9;
+        }
+
+        .about-sec-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            border: 1px solid #eee;
             background: #fff;
+            padding: 50px;
+        }
+
+        .about-sec-text {
+            flex: 1.2;
+        }
+
+        .about-sec-img {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .about-sec-img img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            display: block;
         }
 
         .about-sec h2 {
             font-family: var(--font-head);
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #111;
         }
 
         .about-sec p {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.9;
             color: #555;
-            max-width: 900px;
-            margin: 0 auto;
         }
 
         .about-btn {
             margin-top: 30px;
-            padding: 15px 40px;
+            padding: 14px 36px;
             border: 1px solid #000;
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 2px;
             transition: 0.3s;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
+            display: inline-block;
         }
 
         .about-btn:hover {
             background: #000;
             color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .about-sec-inner { flex-direction: column; padding: 30px 20px; gap: 30px; }
+            .about-sec-img { min-width: unset; width: 100%; }
         }
 
         footer {
@@ -2027,12 +2058,16 @@
             </div>
         </div>
         <div class="about-sec" id="about-sec">
-            <h2 data-key="about_title">Hakkımızda</h2>
-            <p data-key="about_teaser">Kaliteye Atılan Güvenli Bir Adım. Üretimden tasarıma, her aşamada yerli üretim ve
-                üstün kalite prensibiyle hareket ediyoruz. Fine Ayakkabıcılık A.Ş., estetiği uzun ömürlü kullanım
-                sözüyle birleştirerek ayaklarınıza hak ettiği konforu sunar. Sektördeki profesyonel deneyimimizle
-                yanınızdayız.</p>
-            <button class="about-btn" data-nav="about" style="cursor:pointer;" data-key="corp_intro">KURUMSAL TANITIM →</button>
+            <div class="about-sec-inner">
+                <div class="about-sec-text">
+                    <h2 data-key="about_title">Hakkımızda</h2>
+                    <p data-key="about_teaser">Kaliteye Atılan Güvenli Bir Adım. Üretimden tasarıma, her aşamada yerli üretim ve üstün kalite prensibiyle hareket ediyoruz. Fine Ayakkabıcılık A.Ş., estetiği uzun ömürlü kullanım sözüyle birleştirerek ayaklarınıza hak ettiği konforu sunar.</p>
+                    <button class="about-btn" data-nav="about" style="cursor:pointer;" data-key="corp_intro">KURUMSAL TANITIM →</button>
+                </div>
+                <div class="about-sec-img">
+                    <img src="https://static.wixstatic.com/media/e8a500_af5610572f0f41088f10da3f9d37c6d7~mv2.png" alt="Fine Ayakkabıcılık">
+                </div>
+            </div>
         </div>
     </div>
     
