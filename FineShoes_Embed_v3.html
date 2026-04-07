@@ -2299,8 +2299,8 @@
                             <input type="checkbox" required id="kvkk-consent-contact">
                             <label for="kvkk-consent-contact">
                                 <label for="kvkk-consent-contact">
-                                    Kişisel verilerimin <a class="kvkk-link" href="kvkk.html">Aydınlatma
-                                        Metni</a> ve <a class="kvkk-link" href="privacy.html">Gizlilik
+                                    Kişisel verilerimin <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Aydınlatma
+                                        Metni</a> ve <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Gizlilik
                                         Politikası</a> kapsamında işlenmesini onaylıyorum.
                                 </label>
                         </div>
@@ -2315,25 +2315,235 @@
 
     <!-- PRIVACY POLICY VIEW -->
     <div id="policy-view" class="page-view">
-        <div class="page-content" style="max-width:900px; margin:0 auto; padding:40px 20px;">
-            <h1 style="font-family:var(--font-head); font-size:2.5rem; margin-bottom:30px;">Mağaza Politikaları</h1>
-            
-            <div style="margin-bottom:40px;">
-                <h3 style="border-bottom:1px solid #ccc; padding-bottom:10px;">Gizlilik ve Güvenlik</h3>
-                <p>Fine Ayakkabıcılık olarak kişisel verilerinizin güvenliğine önem veriyoruz. 6698 sayılı KVKK kapsamında verileriniz sadece sipariş işleme ve yasal zorunluluklar için kullanılır.</p>
+        <div class="page-content" style="max-width:900px; margin:0 auto; padding:60px 20px; line-height:1.9; color:#333; font-size:0.97rem;">
+
+            <h1 style="font-family:var(--font-head); font-size:2.8rem; margin-bottom:6px;">Yasal Politikalar</h1>
+            <p style="color:#999; margin-bottom:50px; font-size:0.88rem; letter-spacing:0.05em;">SON GÜNCELLEME: NİSAN 2025 &nbsp;|&nbsp; FİNE AYAKKABICILIK</p>
+
+            <!-- NAV TABS -->
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:50px; border-bottom:1px solid #eee; padding-bottom:20px;">
+                <a href="#kvkk" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">KVKK AYDINLATMA</a>
+                <a href="#gizlilik" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">GİZLİLİK POLİTİKASI</a>
+                <a href="#iade" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">İADE &amp; DEĞİŞİM</a>
+                <a href="#cerez" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">ÇEREZ POLİTİKASI</a>
+                <a href="#mesafeli" style="padding:8px 18px; border:1px solid #ccc; border-radius:2px; font-size:0.82rem; letter-spacing:0.08em; text-decoration:none; color:#333; cursor:pointer;">MESAFELİ SATIŞ</a>
             </div>
 
-            <div style="margin-bottom:40px;">
-                <h3 style="border-bottom:1px solid #ccc; padding-bottom:10px;">İade ve Değişim</h3>
-                <p>Üretim hatası olan ürünlerde 14 gün içinde koşulsuz iade ve değişim garantisi sunuyoruz. Kullanılmış veya hasar görmüş ürünler (üretim hatası dışında) iade alınmamaktadır.</p>
+            <!-- ═══════════════ 1. KVKK ═══════════════ -->
+            <div id="kvkk" style="margin-bottom:60px; scroll-margin-top:80px;">
+                <h2 style="font-family:var(--font-head); font-size:1.7rem; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-bottom:24px;">1. KVKK Kapsamında Kişisel Verilerin İşlenmesi Hakkında Aydınlatma Metni</h2>
+
+                <p style="margin-bottom:14px;">6698 sayılı Kişisel Verilerin Korunması Kanunu'nun ("KVKK") 10. maddesi uyarınca, <strong>Fine Ayakkabıcılık</strong> ("Şirket") olarak veri sorumlusu sıfatıyla kişisel verilerinizi aşağıda açıklanan amaçlar, hukuki sebepler ve yöntemlerle işlemekteyiz.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">1.1 Veri Sorumlusunun Kimliği</h3>
+                <p style="margin-bottom:14px;">Fine Ayakkabıcılık &nbsp;|&nbsp; www.fineayakkabicilik.com.tr &nbsp;|&nbsp; info@fineayakkabicilik.com.tr &nbsp;|&nbsp; +90 554 128 25 28</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">1.2 İşlenen Kişisel Veriler</h3>
+                <p style="margin-bottom:8px;">Sitemiz aracılığıyla aşağıdaki kişisel verileriniz toplanabilmektedir:</p>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li><strong>Kimlik Verileri:</strong> Ad, soyad</li>
+                    <li><strong>İletişim Verileri:</strong> E-posta adresi, telefon numarası</li>
+                    <li><strong>Mesleki Veriler:</strong> Firma adı, unvan (isteğe bağlı)</li>
+                    <li><strong>İşlem Verileri:</strong> Teklif talep içeriği, ürün tercihleri</li>
+                    <li><strong>Teknik Veriler:</strong> IP adresi, tarayıcı türü, oturum çerezleri (isteğe bağlı)</li>
+                </ul>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">1.3 Kişisel Verilerin İşlenme Amaçları</h3>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li>Teklif, sipariş ve satış süreçlerinin yürütülmesi</li>
+                    <li>Müşteri ilişkileri yönetimi ve satış sonrası destek hizmetlerinin sağlanması</li>
+                    <li>Ürün ve hizmetlerin tanıtımı, pazarlama faaliyetlerinin gerçekleştirilmesi (açık rıza alınması halinde)</li>
+                    <li>Sözleşmesel yükümlülüklerin ifası ve hukuki süreçlerin yönetilmesi</li>
+                    <li>İlgili mevzuat kapsamındaki yasal yükümlülüklerin yerine getirilmesi</li>
+                    <li>Şikâyet ve başvuruların değerlendirilmesi</li>
+                </ul>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">1.4 Kişisel Verilerin İşlenmesinin Hukuki Sebepleri</h3>
+                <p style="margin-bottom:8px;">Kişisel verileriniz KVKK m. 5 ve m. 6 uyarınca aşağıdaki hukuki sebeplere dayanılarak işlenmektedir:</p>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li>Sözleşmenin kurulması ve ifası (m. 5/2-c)</li>
+                    <li>Hukuki yükümlülüğün yerine getirilmesi (m. 5/2-ç)</li>
+                    <li>Meşru menfaat (m. 5/2-f) — müşteri ilişkileri ve iş geliştirme faaliyetleri</li>
+                    <li>Açık rıza (m. 5/1) — ticari elektronik ileti gönderimi</li>
+                </ul>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">1.5 Kişisel Verilerin Aktarılması</h3>
+                <p style="margin-bottom:14px;">Kişisel verileriniz; kanunen yetkili kamu kurum ve kuruluşlarına yasal zorunluluk kapsamında, e-posta altyapısı sağlayıcısına teknik gereklilik kapsamında ve hukuki danışmanlık alınan avukatlık bürolarına meşru menfaat kapsamında aktarılabilir. Bunlar dışında herhangi bir üçüncü tarafla paylaşılmaz ve yurt dışına aktarılmaz.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">1.6 Kişisel Verilerin Toplanma Yöntemi</h3>
+                <p style="margin-bottom:14px;">Kişisel verileriniz; web sitemizdeki iletişim formu, teklif talep formu ve e-posta aracılığıyla otomatik olmayan yöntemlerle toplanmaktadır. Teknik veriler ise çerezler aracılığıyla otomatik olarak elde edilebilir.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">1.7 Saklama Süreleri</h3>
+                <p style="margin-bottom:14px;">Kişisel verileriniz, işlenme amacının ortadan kalkmasından itibaren veya ilgili mevzuatta öngörülen süreler dolduğunda silinir, yok edilir veya anonim hâle getirilir. Ticari yazışmalar 10 yıl, iletişim formu kayıtları 3 yıl saklanır.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">1.8 İlgili Kişinin Hakları (KVKK m. 11)</h3>
+                <p style="margin-bottom:8px;">Kişisel veri sahibi olarak aşağıdaki haklara sahipsiniz:</p>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+                    <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+                    <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+                    <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri öğrenme</li>
+                    <li>Eksik veya yanlış işlenmiş verilerin düzeltilmesini isteme</li>
+                    <li>KVKK m. 7'de öngörülen şartlar çerçevesinde silinmesini veya yok edilmesini isteme</li>
+                    <li>Düzeltme/silme işlemlerinin aktarılan üçüncü kişilere bildirilmesini isteme</li>
+                    <li>Münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize çıkan sonuca itiraz etme</li>
+                    <li>Kanuna aykırı işleme nedeniyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+                </ul>
+                <p style="margin-bottom:14px;"><strong>Başvuru:</strong> Haklarınızı kullanmak için kimliğinizi doğrulayıcı belgeyle birlikte <strong>info@fineayakkabicilik.com.tr</strong> adresine e-posta gönderebilir veya iadeli taahhütlü posta ile yazılı başvuruda bulunabilirsiniz. Başvurularınız en geç 30 gün içinde sonuçlandırılır. Başvurunuzun reddedilmesi, verilen yanıtın yetersiz bulunması veya süresinde yanıt verilmemesi hâlinde Kişisel Verileri Koruma Kurulu'na şikâyette bulunma hakkınız saklıdır.</p>
             </div>
 
-            <div style="margin-bottom:40px;">
-                <h3 style="border-bottom:1px solid #ccc; padding-bottom:10px;">Çerez Politikası</h3>
-                <p>Sitemizde kullanıcı deneyimini iyileştirmek için zorunlu ve analitik çerezler kullanılmaktadır. Tarayıcı ayarlarınızdan çerezleri yönetebilirsiniz.</p>
+            <!-- ═══════════════ 2. GİZLİLİK ═══════════════ -->
+            <div id="gizlilik" style="margin-bottom:60px; scroll-margin-top:80px;">
+                <h2 style="font-family:var(--font-head); font-size:1.7rem; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-bottom:24px;">2. Gizlilik Politikası</h2>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">2.1 Genel İlkeler</h3>
+                <p style="margin-bottom:14px;">Fine Ayakkabıcılık olarak kullanıcılarımızın gizliliğine saygı duyuyor, kişisel verilerinizin korunması için teknik ve idari tedbirleri eksiksiz uygulamayı taahhüt ediyoruz. Bu politika, fineayakkabicilik.com.tr alan adı üzerindeki web sitesi ve entegre embed sayfaları kapsamında geçerlidir.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">2.2 Toplanan Bilgilerin Kullanımı</h3>
+                <p style="margin-bottom:8px;">Sitemiz üzerinden toplanan bilgiler yalnızca aşağıdaki amaçlarla kullanılır:</p>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li>Teklif ve sipariş taleplerinin değerlendirilmesi ve yanıtlanması</li>
+                    <li>Satış öncesi ve sonrası müşteri desteğinin sağlanması</li>
+                    <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+                    <li>Açık rızanız olması hâlinde tanıtım ve bilgilendirme e-postaları gönderilmesi</li>
+                </ul>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">2.3 Veri Güvenliği</h3>
+                <p style="margin-bottom:14px;">Sitemiz SSL/TLS sertifikası ile korunmakta olup tüm veri iletimi şifreli (HTTPS) bağlantı üzerinden gerçekleşmektedir. E-posta ile iletilen veriler yetkisiz erişime karşı güvenli sunucularda saklanmaktadır. Şirketimiz çalışanları, müşteri verilerine yalnızca iş gereklilikleri kapsamında ve gizlilik yükümlülüğü altında erişebilmektedir.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">2.4 Üçüncü Taraf Paylaşımları</h3>
+                <p style="margin-bottom:14px;">Kişisel verileriniz; yasal zorunluluklar, mahkeme kararı veya yetkili kamu mercilerinin talebi dışında hiçbir üçüncü tarafla ticari amaçla paylaşılmaz, satılmaz veya kiralanmaz. Sitemizde ücretli reklam ağı veya üçüncü taraf izleme pikseli bulunmamaktadır.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">2.5 Bağlantılı Siteler</h3>
+                <p style="margin-bottom:14px;">Web sitemiz üçüncü taraf platformlara (Trendyol, Hepsiburada, Amazon) bağlantı içerebilir. Bu sitelere yönlendirilmeniz hâlinde ilgili platformun kendi gizlilik politikası geçerli olacaktır. Söz konusu platformların uygulamaları üzerinde herhangi bir sorumluluğumuz bulunmamaktadır.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">2.6 Çocukların Gizliliği</h3>
+                <p style="margin-bottom:14px;">Sitemiz 18 yaşın altındaki bireylere yönelik değildir. 18 yaş altına ait kişisel veri toplandığının fark edilmesi hâlinde söz konusu veriler derhal silinecektir.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">2.7 Politika Güncellemeleri</h3>
+                <p style="margin-bottom:14px;">Bu gizlilik politikası zaman zaman güncellenebilir. Değişiklikler sayfada yayımlandığı tarihten itibaren geçerli olur. Önemli değişikliklerde kayıtlı kullanıcılara e-posta ile bildirim yapılır.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">2.8 İletişim</h3>
+                <p style="margin-bottom:14px;">Gizlilik politikamıza ilişkin soru ve talepleriniz için: <strong>info@fineayakkabicilik.com.tr</strong></p>
             </div>
 
-            <div style="text-align:center; margin-top:50px;">
+            <!-- ═══════════════ 3. İADE ═══════════════ -->
+            <div id="iade" style="margin-bottom:60px; scroll-margin-top:80px;">
+                <h2 style="font-family:var(--font-head); font-size:1.7rem; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-bottom:24px;">3. İade ve Değişim Politikası</h2>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.1 Genel Koşullar</h3>
+                <p style="margin-bottom:14px;">Fine Ayakkabıcılık, 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği çerçevesinde müşteri haklarını eksiksiz sağlamayı taahhüt eder.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.2 Cayma Hakkı</h3>
+                <p style="margin-bottom:14px;">Tüketiciler, herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin ürünü teslim aldıkları tarihten itibaren <strong>14 (on dört) gün</strong> içinde cayma hakkını kullanabilir. Cayma hakkı bildiriminin tarafımıza ulaşmasının ardından ürün iade gönderimi için 10 iş günü süre tanınır.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.3 İade Koşulları</h3>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li>Ürün kullanılmamış, yıkanmamış ve orijinal ambalajında olmalıdır.</li>
+                    <li>Ürünle birlikte gelen tüm aksesuar, etiket ve belgelerin eksiksiz iade edilmesi gerekmektedir.</li>
+                    <li>Üretim hatası kaynaklı iadeler için kargo ücreti firmamız tarafından karşılanır.</li>
+                    <li>Cayma hakkı kapsamındaki iadelerde kargo ücreti tüketiciye aittir.</li>
+                    <li>Giyilmiş, kullanım izleri veya koku içeren ürünler iade kabul edilmez.</li>
+                </ul>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.4 Cayma Hakkından Muaf Ürünler</h3>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li>Müşteri talebi ve kişisel özelliklere göre üretilen (özel sipariş) ürünler</li>
+                    <li>Toplu (kurumsal) siparişlerde sözleşmede aksi kararlaştırılmadıkça standart cayma hakkı uygulanmaz</li>
+                    <li>Hijyen amacıyla koruyucu contası açılmış ürünler (varsa)</li>
+                </ul>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.5 Kusurlu Ürün</h3>
+                <p style="margin-bottom:14px;">Teslimde hasarlı veya ayıplı çıkan ürünler için teslimden itibaren 2 yıl süresince ayıp ihbar hakkı saklıdır. Ayıplı ürün tespitinde tüketici; onarım, değişim, bedel indirimi veya sözleşmeden dönme haklarından birini seçme hakkına sahiptir.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">3.6 İade Süreci</h3>
+                <p style="margin-bottom:8px;">İade talebinizi başlatmak için:</p>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li><strong>E-posta:</strong> info@fineayakkabicilik.com.tr (konu: İade Talebi – Sipariş No)</li>
+                    <li><strong>Telefon/WhatsApp:</strong> +90 554 128 25 28</li>
+                </ul>
+                <p style="margin-bottom:14px;">Onaylanan iadelerde ücret iadesi, ürünün depoya ulaşmasından itibaren <strong>14 iş günü</strong> içinde ödeme yönteminize iade edilir.</p>
+            </div>
+
+            <!-- ═══════════════ 4. ÇEREZ ═══════════════ -->
+            <div id="cerez" style="margin-bottom:60px; scroll-margin-top:80px;">
+                <h2 style="font-family:var(--font-head); font-size:1.7rem; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-bottom:24px;">4. Çerez (Cookie) Politikası</h2>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">4.1 Çerez Nedir?</h3>
+                <p style="margin-bottom:14px;">Çerezler, tarayıcınız aracılığıyla cihazınıza kaydedilen küçük metin dosyalarıdır. Web sitelerinin kullanıcı tercihlerini hatırlamasını, oturum bilgilerini sürdürmesini ve ziyaret istatistiklerini toplamasını sağlar.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">4.2 Kullandığımız Çerez Türleri</h3>
+                <div style="overflow-x:auto; margin-bottom:14px;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+                        <thead>
+                            <tr style="background:#f5f5f5;">
+                                <th style="border:1px solid #ddd; padding:10px 14px; text-align:left;">Çerez Türü</th>
+                                <th style="border:1px solid #ddd; padding:10px 14px; text-align:left;">Amaç</th>
+                                <th style="border:1px solid #ddd; padding:10px 14px; text-align:left;">Zorunlu mu?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:10px 14px;"><strong>Oturum Çerezleri</strong></td>
+                                <td style="border:1px solid #ddd; padding:10px 14px;">Sayfa geçişleri arasında kullanıcı oturumunun sürdürülmesi</td>
+                                <td style="border:1px solid #ddd; padding:10px 14px;">Evet</td>
+                            </tr>
+                            <tr style="background:#fafafa;">
+                                <td style="border:1px solid #ddd; padding:10px 14px;"><strong>Tercih Çerezleri</strong></td>
+                                <td style="border:1px solid #ddd; padding:10px 14px;">Dil seçimi (TR/EN) gibi kullanıcı tercihlerinin hatırlanması</td>
+                                <td style="border:1px solid #ddd; padding:10px 14px;">Hayır</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:10px 14px;"><strong>Analitik Çerezler</strong></td>
+                                <td style="border:1px solid #ddd; padding:10px 14px;">Anonim ziyaret istatistiklerinin toplanması (Wix Analytics)</td>
+                                <td style="border:1px solid #ddd; padding:10px 14px;">Hayır</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-bottom:14px;">Sitemizde reklam veya pazarlama amacıyla üçüncü taraf çerez kullanılmamaktadır.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">4.3 Çerezleri Yönetme</h3>
+                <p style="margin-bottom:8px;">Çerez tercihlerinizi aşağıdaki yollarla yönetebilirsiniz:</p>
+                <ul style="padding-left:22px; margin-bottom:14px;">
+                    <li><strong>Tarayıcı Ayarları:</strong> Chrome, Firefox, Safari ve Edge tarayıcılarının ayarlar menüsünden çerezleri devre dışı bırakabilir veya silebilirsiniz.</li>
+                    <li><strong>Gizli Sekme:</strong> Tarayıcınızın gizli/özel modunu kullanarak çerez saklanmasını engelleyebilirsiniz.</li>
+                </ul>
+                <p style="margin-bottom:14px;">Zorunlu çerezlerin devre dışı bırakılması hâlinde sitenin bazı işlevleri düzgün çalışmayabilir.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">4.4 Çerezler ve KVKK / GDPR</h3>
+                <p style="margin-bottom:14px;">Zorunlu olmayan çerezler için site girişinde açık rıza alınmaktadır. Rızanızı geri almak için tarayıcı çerezlerinizi temizleyebilir veya info@fineayakkabicilik.com.tr adresine başvurabilirsiniz.</p>
+            </div>
+
+            <!-- ═══════════════ 5. MESAFELİ SATIŞ ═══════════════ -->
+            <div id="mesafeli" style="margin-bottom:60px; scroll-margin-top:80px;">
+                <h2 style="font-family:var(--font-head); font-size:1.7rem; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-bottom:24px;">5. Mesafeli Satış Sözleşmesi Ön Bilgilendirme</h2>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.1 Satıcı Bilgileri</h3>
+                <p style="margin-bottom:14px;"><strong>Unvan:</strong> Fine Ayakkabıcılık<br>
+                <strong>Adres:</strong> Türkiye<br>
+                <strong>E-posta:</strong> info@fineayakkabicilik.com.tr<br>
+                <strong>Telefon:</strong> +90 554 128 25 28<br>
+                <strong>Web:</strong> www.fineayakkabicilik.com.tr</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.2 Sözleşmenin Konusu</h3>
+                <p style="margin-bottom:14px;">Bu ön bilgilendirme metni, 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği kapsamında tüketicileri web sitesi üzerinden gerçekleştirilen alışverişler hakkında bilgilendirme amacıyla hazırlanmıştır.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.3 Ürün ve Fiyat Bilgisi</h3>
+                <p style="margin-bottom:14px;">Ürünlere ait özellikler ve fiyatlar sipariş aşamasında tarafınıza iletilir. Fiyatlar KDV dahil Türk Lirası cinsindendir. Toplu ve kurumsal siparişlerde fiyat teklif bazlı belirlenir.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.4 Teslimat</h3>
+                <p style="margin-bottom:14px;">Stokta hazır ürünler sipariş onayından itibaren <strong>3–7 iş günü</strong> içinde kargoya verilir. Özel sipariş ve toplu üretimlerde teslimat süresi sipariş aşamasında ayrıca bildirilir. Teslimat Türkiye genelinde anlaşmalı kargo firmaları aracılığıyla yapılır.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.5 Ödeme Koşulları</h3>
+                <p style="margin-bottom:14px;">Kurumsal B2B siparişlerde ödeme koşulları sözleşme ile belirlenir. Perakende satışlarda sipariş onayı ile birlikte ödeme talep edilir. Havale/EFT ve kredi kartı ile ödeme kabul edilir.</p>
+
+                <h3 style="font-size:1.05rem; margin:20px 0 8px; color:#111;">5.6 Uyuşmazlık Çözümü</h3>
+                <p style="margin-bottom:14px;">Tüketicilerle yaşanabilecek uyuşmazlıklarda öncelikle bilgi@fineayakkabicilik.com.tr adresi üzerinden çözüm aranacaktır. Çözüme kavuşturulamayan durumlarda; <strong>Tüketici Hakem Heyeti</strong> (yasal parasal sınırlar dahilinde) ve <strong>Tüketici Mahkemeleri</strong> yetkilidir. Şikâyetlerinizi aynı zamanda <strong>e-Devlet</strong> portalı üzerinden Tüketici Bilgi Sistemi'ne (TÜBİS) iletebilirsiniz.</p>
+            </div>
+
+            <div style="text-align:center; margin-top:60px; padding-top:30px; border-top:1px solid #eee;">
+                <p style="color:#999; font-size:0.85rem; margin-bottom:20px;">Bu politikalar Fine Ayakkabıcılık tarafından yürürlükteki Türk mevzuatına uygun olarak hazırlanmıştır.</p>
                 <button class="info-link" data-nav="home" style="cursor:pointer;" data-key="back_home">← ANA SAYFAYA DÖN</button>
             </div>
         </div>
@@ -2467,8 +2677,8 @@
                 <div class="kvkk-check-row">
                     <input type="checkbox" required id="kvkk-consent">
                     <label for="kvkk-consent">
-                        Kişisel verilerimin <a class="kvkk-link" href="kvkk.html">Aydınlatma
-                            Metni</a> ve <a class="kvkk-link" href="privacy.html">Gizlilik
+                        Kişisel verilerimin <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Aydınlatma
+                            Metni</a> ve <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Gizlilik
                             Politikası</a>
                         kapsamında işlenmesini onaylıyorum.
                     </label>
