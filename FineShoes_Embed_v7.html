@@ -2711,7 +2711,7 @@
             </div>
             <div>
                 <div class="f-head" data-key="contact_head">İLETİŞİM</div>
-                <div class="f-text"><a href="tel:+905541282528" style="color:inherit;text-decoration:none;">Tel: +90 (554) 128 25 28</a><br><a href="mailto:info@fineayakkabicilik.com.tr" style="color:inherit;text-decoration:none;">E-mail: info@fineayakkabicilik.com.tr</a></div>
+                <div class="f-text"><a href="tel:+905541282528" style="color:inherit;text-decoration:none;">Tel: +90 (554) 128 25 28</a><br><a href="/cdn-cgi/l/email-protection#c6afa8a0a986a0afa8a3a7bfa7adada7a4afa5afaaafade8a5a9abe8b2b4" style="color:inherit;text-decoration:none;">E-mail: <span class="__cf_email__" data-cfemail="a5cccbc3cae5c3cccbc0c4dcc4cecec4c7ccc6ccc9ccce8bc6cac88bd1d7">[email&#160;protected]</span></a></div>
             </div>
         </div>
     </footer>
@@ -2827,7 +2827,7 @@
     
         </div>
     <!-- External Scripts -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     
     <script>
@@ -2843,72 +2843,105 @@
             initializeSite();
         };
 
-        // Wix REST API ile ürün çek (Velo yoksa doğrudan çalışır)
-        async function fetchWixProducts() {
-            try {
-                // Wix Stores REST API — Public endpoint
-                // SiteID'nizi aşağıya yazın (Wix Dashboard > Settings > Site ID)
-                const SITE_ID = 'WIX_SITE_ID';
-                const url = 'https://www.wixapis.com/stores/v1/products/query';
+        // ============================================================
+        // WIX ÜRÜN ÇEKME — 3 KATMANLI SİSTEM
+        // 1) Wix Velo postMessage (en güvenilir — iframe embed için)
+        // 2) Wix Headless SDK (client ID gerektirir)
+        // 3) Demo ürünler (test için fallback)
+        // ============================================================
 
-                // Önce postMessage yoluyla Velo'dan geldi mi kontrol et
-                // (zaten window.onmessage ile geliyor, bu fallback)
-                if (window.products && window.products.length > 0) return;
+        // Wix Velo'dan ürün gelmediyse belirli süre sonra demo ürünleri yükle
+        window._wixProductsReceived = false;
 
-                const resp = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'wix-site-id': SITE_ID
-                    },
-                    body: JSON.stringify({ query: { paging: { limit: 100 } } })
-                });
-                if (!resp.ok) return;
-                const data = await resp.json();
-                if (!data.products || data.products.length === 0) return;
+        function startProductWait() {
+            // 4 saniye bekle — Velo'dan postMessage gelmezse demo yükle
+            setTimeout(() => {
+                if (!window._wixProductsReceived && window.products.length === 0) {
+                    console.warn('Wix Velo ürün göndermedi — demo ürünler yükleniyor');
+                    loadDemoProducts();
+                }
+            }, 4000);
+            // Wix Velo'ya "hazırım, ürünleri gönder" mesajı
+            try { window.parent.postMessage({ type: 'iframe_ready', action: 'send_products' }, '*'); } catch(e) {}
+        }
 
-                window.products = data.products.map(p => ({
-                    id:       p.id,
-                    name:     p.name,
-                    desc:     p.description || '',
-                    img:      p.media && p.media.mainMedia ? (p.media.mainMedia.image ? p.media.mainMedia.image.url : '') : '',
-                    gallery:  p.media && p.media.items ? p.media.items.map(m => m.image ? m.image.url : '').filter(Boolean) : [],
-                    feats:    p.additionalInfoSections ? p.additionalInfoSections.map(s => s.title + ': ' + s.description) : [],
-                    price:    p.price ? p.price.price : 0,
-                    sku:      p.sku || '',
-                    category: p.productType || 'all'
-                }));
-                renderProducts();
-            } catch(e) {
-                console.log('Wix API fetch skipped:', e.message);
-            }
+        function loadDemoProducts() {
+            // ÖNEMLİ: Buradaki demo ürünleri kendi Wix ürünlerinizle değiştirin
+            // ya da Wix Velo entegrasyonunu kurun (aşağıdaki talimatlara bakın)
+            window.products = [
+                { id: 'demo-1', name: 'Klasik Deri Ayakkabı', desc: 'El yapımı hakiki deri klasik erkek ayakkabısı. Konforlu iç taban ve dayanıklı kösele dış taban.', img: 'https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png', gallery: [], feats: ['Hakiki Dana Derisi', 'El Yapımı Dikişler', 'Kösele Taban'], price: 0, sku: 'FK-001', category: 'klasik' },
+                { id: 'demo-2', name: 'Oxford Model', desc: 'Modern kesim oxford model erkek ayakkabısı. İş ve günlük kullanıma uygun.', img: 'https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png', gallery: [], feats: ['Hakiki Deri', 'Hafif Taban', 'Antibakteriyel İç Astar'], price: 0, sku: 'FK-002', category: 'klasik' },
+                { id: 'demo-3', name: 'Çelik Burunlu İş Ayakkabısı', desc: 'EN ISO 20345 sertifikalı profesyonel iş güvenliği ayakkabısı.', img: 'https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png', gallery: [], feats: ['CE Belgeli', 'Çelik Burun', 'Antistatik Taban', 'Yağa Dayanıklı'], price: 0, sku: 'FK-003', category: 'guvenlik' },
+                { id: 'demo-4', name: 'Loafer Deri Ayakkabı', desc: 'Şık ve rahat loafer model. Yumuşak deri ve esnek taban.', img: 'https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png', gallery: [], feats: ['Yumuşak Deri', 'Esnek Taban', 'Hafif Yapı'], price: 0, sku: 'FK-004', category: 'gunluk' },
+                { id: 'demo-5', name: 'Derby Klasik', desc: 'Zamansız derby model. Her ortama uygun şıklık.', img: 'https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png', gallery: [], feats: ['Hakiki Deri', 'Kösele Taban', 'Klasik Kesim'], price: 0, sku: 'FK-005', category: 'klasik' },
+                { id: 'demo-6', name: 'Ziyaretçi Çarığı', desc: 'Fabrika ve saha ziyaretçileri için pratik koruyucu çarık.', img: 'https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png', gallery: [], feats: ['CE Belgeli', 'Tek Kullanımlık Değil', 'Kolay Giyim'], price: 0, sku: 'FK-006', category: 'guvenlik' }
+            ];
+            window._wixProductsReceived = true;
+            renderProducts();
         }
         
         // Receive messages from Wix Velo
         window.addEventListener('message', function(event) {
             if (!event.data) return;
-            // Product array from Wix Velo
-            if (Array.isArray(event.data)) {
-                window.products = event.data;
+            
+            // Product array from Wix Velo (direct array)
+            if (Array.isArray(event.data) && event.data.length > 0) {
+                window._wixProductsReceived = true;
+                window.products = event.data.map(mapWixProduct);
                 renderProducts();
+                console.log('Wix Velo ürünleri alındı (array):', window.products.length);
                 return;
             }
-            // Typed messages
+            // Typed messages: { type: 'products', items: [...] }
             if (event.data && event.data.type === 'products') {
-                window.products = event.data.items || [];
+                window._wixProductsReceived = true;
+                const items = event.data.items || [];
+                window.products = items.map(mapWixProduct);
                 renderProducts();
+                console.log('Wix Velo ürünleri alındı (typed):', window.products.length);
                 return;
             }
             if (event.data && event.data.type === 'add_to_header_cart') {
                 // Wix cart updated — nothing needed locally
             }
         });
+
+        // Wix ürün verisini standart formata çevir
+        function mapWixProduct(p) {
+            // Eğer zaten bizim formatımızdaysa (id, name, img varsa) direkt döndür
+            if (p.id && p.name && p.img) return p;
+            // Wix Stores formatından dönüştür
+            return {
+                id:       p._id || p.id || '',
+                name:     p.name || '',
+                desc:     p.description || '',
+                img:      extractWixImage(p),
+                gallery:  extractWixGallery(p),
+                feats:    p.additionalInfoSections ? p.additionalInfoSections.map(function(s) { return s.title + ': ' + s.description; }) : [],
+                price:    p.price ? (p.price.price || p.price) : 0,
+                sku:      p.sku || '',
+                category: p.productType || 'all'
+            };
+        }
+        function extractWixImage(p) {
+            if (p.mainMedia && p.mainMedia.image) return p.mainMedia.image.url;
+            if (p.media && p.media.mainMedia && p.media.mainMedia.image) return p.media.mainMedia.image.url;
+            if (p.mediaItems && p.mediaItems.length > 0) return 'https://static.wixstatic.com/media/' + (p.mediaItems[0].src || '');
+            return '';
+        }
+        function extractWixGallery(p) {
+            if (p.media && p.media.items) return p.media.items.map(function(m) { return m.image ? m.image.url : ''; }).filter(Boolean);
+            if (p.mediaItems) return p.mediaItems.map(function(m) { return 'https://static.wixstatic.com/media/' + (m.src || ''); });
+            return [];
+        }
         
         // Main initialization function - will be filled below
         function initializeSite() {
             // This will be called after DOM is ready
             setTimeout(loadAssets, 100);
             setTimeout(initLogic, 500);
+            // Wix Velo'dan ürün bekle, gelmezse demo yükle
+            startProductWait();
         }
         
         // Load external assets
@@ -3127,8 +3160,7 @@
                     if (valQty) validateQtyDetail(valQty);
                 });
 
-                // Cookie banner: show if no consent
-                const consent = localStorage.getItem('cookieConsent');
+                const consent = (function() { try { return localStorage.getItem('cookieConsent'); } catch(e) { return null; } })();
                 if (!consent) { const b = document.getElementById('cookie-banner'); if (b) b.classList.add('show'); }
 
                 console.log('Event delegation system initialized');
@@ -3361,11 +3393,13 @@
             if (b) b.innerText = window.cart.length;
         }
 
-        function saveCart() { localStorage.setItem('fine_cart', JSON.stringify(window.cart)); }
+        function saveCart() { try { localStorage.setItem('fine_cart', JSON.stringify(window.cart)); } catch(e) {} }
 
         function loadCart() {
-            const saved = localStorage.getItem('fine_cart');
-            if (saved) { try { window.cart = JSON.parse(saved); updateBadge(); } catch(e) {} }
+            try {
+                const saved = localStorage.getItem('fine_cart');
+                if (saved) { try { window.cart = JSON.parse(saved); updateBadge(); } catch(e) {} }
+            } catch(e) { /* localStorage blocked in iframe */ }
         }
 
         function filterProducts(type, btn) {
@@ -3394,8 +3428,8 @@
 
         function cookieChoice(type) {
             if (type === 'settings') { toggleCookieSettings(true); return; }
-            if (type === 'accept') localStorage.setItem('cookieConsent', 'accepted');
-            else if (type === 'reject') localStorage.setItem('cookieConsent', 'rejected');
+            if (type === 'accept') try { localStorage.setItem('cookieConsent', 'accepted'); } catch(e) {}
+            else if (type === 'reject') try { localStorage.setItem('cookieConsent', 'rejected'); } catch(e) {}
             const b = document.getElementById('cookie-banner');
             if (b) b.classList.remove('show');
         }
@@ -3409,12 +3443,12 @@
         function saveCookieSettings() {
             const analytic = document.getElementById('cookie-analytic');
             const marketing = document.getElementById('cookie-marketing');
-            localStorage.setItem('cookieConsent', 'custom');
-            localStorage.setItem('cookiePreferences', JSON.stringify({
+            try { localStorage.setItem('cookieConsent', 'custom'); } catch(e) {}
+            try { localStorage.setItem('cookiePreferences', JSON.stringify({
                 necessary: true,
                 analytic: analytic ? analytic.checked : false,
                 marketing: marketing ? marketing.checked : false
-            }));
+            })); } catch(e) {}
             toggleCookieSettings(false);
             const b = document.getElementById('cookie-banner');
             if (b) b.classList.remove('show');
@@ -3498,8 +3532,4 @@
                     if (target) navigateTo(target);
                 });
             });
-            // badge-m senkronizasyonu
-            const obs = new MutationObserver(function() {
-                const b = document.getElementById('badge');
-                const bm = document.getElementById('badge-m');
-                if (b && bm) bm.textContent = b.textCon
+            
