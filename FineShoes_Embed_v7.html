@@ -2885,7 +2885,7 @@
         }
         
         // Receive messages from Wix Velo
-        window.onmessage = function(event) {
+        window.addEventListener('message', function(event) {
             if (!event.data) return;
             // Product array from Wix Velo
             if (Array.isArray(event.data)) {
@@ -2899,10 +2899,10 @@
                 renderProducts();
                 return;
             }
-            if (event.data.type === 'add_to_header_cart') {
+            if (event.data && event.data.type === 'add_to_header_cart') {
                 // Wix cart updated — nothing needed locally
             }
-        };
+        });
         
         // Main initialization function - will be filled below
         function initializeSite() {
@@ -3200,6 +3200,8 @@
                     </div>`).join('');
             }
         }
+
+        function navigateTo(view) { go(view); }
 
         function go(view) {
             const h = document.getElementById('main-header');
