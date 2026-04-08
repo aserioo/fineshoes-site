@@ -2015,7 +2015,24 @@
             .add-group { flex-wrap: wrap; }
         }
 
-        @media (max-width: 480px) {
+        /* ====== MOBİL TOUCH OPTİMİZASYONU ====== */
+        .is-mobile * { -webkit-tap-highlight-color: transparent; }
+        .is-mobile a,
+        .is-mobile button,
+        .is-mobile [onclick],
+        .is-mobile [data-nav] {
+            touch-action: manipulation;
+            cursor: pointer;
+        }
+        .is-mobile .p-card-minimal,
+        .is-mobile .cat-btn,
+        .is-mobile .filter-tab,
+        .is-mobile .f-link,
+        .is-mobile .info-link {
+            min-height: 44px;
+        }
+
+                @media (max-width: 480px) {
             .f-grid { grid-template-columns: 1fr; }
             .prod-grid-home { grid-template-columns: 1fr; }
             .prod-grid-home .p-img-box { height: 260px !important; }
@@ -2816,16 +2833,31 @@
         window.curLang = 'tr';
         window.langData = {};
         
-        // Notify Wix Velo that iframe is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            window.parent.postMessage({ type: 'iframe_ready' }, '*');
-            initializeSite();
-        });
+        // ── Mobil algılama ──
+        (function() {
+            var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+            document.documentElement.classList.toggle('is-mobile', isMobile);
+            if (isMobile) {
+                document.documentElement.style.touchAction = 'manipulation';
+                // Wix iframe'de iOS scroll fix
+                document.body && (document.body.style.webkitOverflowScrolling = 'touch');
+            }
+            window._isMobile = isMobile;
+        })();
 
-        // Fallback — DOMContentLoaded geçtiyse hemen çalıştır
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        // ── Tek seferlik başlatma (çift çalışmayı önler) ──
+        var _siteInitialized = false;
+        function bootSite() {
+            if (_siteInitialized) return;
+            _siteInitialized = true;
             window.parent.postMessage({ type: 'iframe_ready' }, '*');
             initializeSite();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', bootSite);
+        } else {
+            setTimeout(bootSite, 0);
         }
 
         // Wix REST API ile ürün çek (Velo yoksa doğrudan çalışır)
@@ -2870,7 +2902,7 @@
         }
         
         // Receive messages from Wix Velo
-        window.onmessage = function(event) {
+        window.addEventListener('message', function(event) {
             if (!event.data) return;
             // Product array from Wix Velo
             if (Array.isArray(event.data)) {
@@ -2884,16 +2916,21 @@
                 renderProducts();
                 return;
             }
-            if (event.data.type === 'add_to_header_cart') {
+            if (event.data && event.data.type === 'add_to_header_cart') {
                 // Wix cart updated — nothing needed locally
             }
-        };
+        });
         
         // Main initialization function - will be filled below
         function initializeSite() {
-            // This will be called after DOM is ready
             loadAssets();
-            setTimeout(initLogic, 100);
+            // DOM hazır olduğunda initLogic çalıştır
+            if (document.readyState === 'complete') {
+                initLogic();
+            } else {
+                window.addEventListener('load', initLogic, { once: true });
+                setTimeout(initLogic, 800); // fallback
+            }
         }
         
         // Load external assets
@@ -3154,9 +3191,7 @@
         }
 
         function renderProducts() {
-            renderTrack('p-track', window.products, true);   // Ana sayfa: swiper slide
-            renderTrack('p-track-full', window.products, false); // Ürünler sayfası: grid
-            setTimeout(initSwipers, 100);
+            renderProductsFiltered();
         }
 
         function renderTrack(trackId, list, isSlider) {
@@ -3167,10 +3202,10 @@
             if (useSlide) {
                 track.innerHTML = list.map(p => `
                     <div class="swiper-slide">
-                        <div class="p-card-minimal" data-action="open-detail" data-product-id="${p.id}" style="cursor:pointer;">
+                        <div class="p-card-minimal" onclick="openDetail('${p.id}')" style="cursor:pointer;">
                             <div class="p-img-box">
                                 <img src="${p.img || 'https://via.placeholder.com/300x300?text=Fine+Shoes'}" class="p-img" loading="lazy">
-                                <button class="p-ctx-btn" data-action="add-product" data-product-id="${p.id}">LİSTEYE EKLE (+10)</button>
+                                <button class="p-ctx-btn" onclick="event.stopPropagation(); add('${p.id}')">LİSTEYE EKLE (+10)</button>
                             </div>
                             <div class="p-title">${p.name}</div>
                             ${p.price ? '<div style="text-align:center;padding:0 12px 12px;color:#888;font-size:0.9rem;">' + (typeof p.price === 'number' ? p.price.toFixed(2) + ' ₺' : p.price) + '</div>' : ''}
@@ -3178,10 +3213,10 @@
                     </div>`).join('');
             } else {
                 track.innerHTML = list.map(p => `
-                    <div class="p-card-minimal" data-action="open-detail" data-product-id="${p.id}" style="cursor:pointer;">
+                    <div class="p-card-minimal" onclick="openDetail('${p.id}')" style="cursor:pointer;">
                         <div class="p-img-box">
                             <img src="${p.img || 'https://via.placeholder.com/300x300?text=Fine+Shoes'}" class="p-img" loading="lazy">
-                            <button class="p-ctx-btn" data-action="add-product" data-product-id="${p.id}">LİSTEYE EKLE (+10)</button>
+                            <button class="p-ctx-btn" onclick="event.stopPropagation(); add('${p.id}')">LİSTEYE EKLE (+10)</button>
                         </div>
                         <div class="p-title">${p.name}</div>
                         ${p.price ? '<div style="text-align:center;padding:0 12px 12px;color:#888;font-size:0.9rem;">' + (typeof p.price === 'number' ? p.price.toFixed(2) + ' ₺' : p.price) + '</div>' : ''}
@@ -3258,7 +3293,7 @@
             if (rt) {
                 rt.innerHTML = window.products.filter(x => x.id !== id).map(r => `
                     <div class="swiper-slide">
-                        <div class="p-card" data-action="open-detail" data-product-id="${r.id}" style="cursor:pointer;">
+                        <div class="p-card" onclick="openDetail('${r.id}')" style="cursor:pointer;">
                             <div class="p-img-box"><img src="${r.img}" class="p-img"></div>
                             <div class="p-info-wrap"><div class="p-title">${r.name}</div></div>
                         </div>
@@ -3343,8 +3378,11 @@
         }
 
         function updateBadge() {
-            const b = document.getElementById('badge');
-            if (b) b.innerText = window.cart.length;
+            var count = window.cart.length;
+            var b = document.getElementById('badge');
+            if (b) b.innerText = count;
+            var bm = document.getElementById('badge-m');
+            if (bm) bm.innerText = count;
         }
 
         function saveCart() { localStorage.setItem('fine_cart', JSON.stringify(window.cart)); }
@@ -3359,7 +3397,18 @@
                 document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             }
-            renderProducts();
+            window._activeFilter = type || 'all';
+            renderProductsFiltered();
+        }
+
+        function renderProductsFiltered() {
+            var filter = window._activeFilter || 'all';
+            var list = filter === 'all' ? window.products : window.products.filter(function(p) {
+                return p.category === filter;
+            });
+            renderTrack('p-track', window.products, true);   // Ana sayfa: tüm ürünler
+            renderTrack('p-track-full', list, false);         // Ürünler sayfası: filtrelenmiş
+            setTimeout(initSwipers, 100);
         }
 
         function toggleSearch() { alert('Arama özelliği yakında eklenecektir.'); }
@@ -3476,12 +3525,7 @@
             }
         }
 
-        // Mobil menüdeki nav linkleri için event listener
+        // Mobil menü nav linkleri — initLogic içinde zaten data-nav onclick var, bu blok temizlendi
+        // Ek: badge-m senkronizasyonu
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('#mobile-nav [data-nav]').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    const target = this.getAttribute('data-nav');
-                    if (target) navigateTo(target);
-                });
-            });
             
