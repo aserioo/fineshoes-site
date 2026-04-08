@@ -2689,7 +2689,7 @@
                 <div class="f-head" data-key="contact_head">İLETİŞİM</div>
                 <div class="f-text">
                     <a href="tel:+905541282528" style="color:inherit; text-decoration:none;">Tel: +90 (554) 128 25 28</a><br>
-                    <a href="mailto:info@fineayakkabicilik.com.tr" style="color:inherit; text-decoration:none;">E-mail: info@fineayakkabicilik.com.tr</a>
+                    <a href="/cdn-cgi/l/email-protection#caa3a4aca58aaca3a4afabb3aba1a1aba8a3a9a3a6a3a1e4a9a5a7e4beb8" style="color:inherit; text-decoration:none;">E-mail: <span class="__cf_email__" data-cfemail="1970777f76597f70777c7860787272787b707a70757072377a7674376d6b">[email&#160;protected]</span></a>
                 </div>
             </div>
         </div>
@@ -2806,7 +2806,7 @@
     
         </div>
     <!-- External Scripts -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     
     <script>
@@ -2817,10 +2817,16 @@
         window.langData = {};
         
         // Notify Wix Velo that iframe is ready
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', function() {
             window.parent.postMessage({ type: 'iframe_ready' }, '*');
             initializeSite();
-        };
+        });
+
+        // Fallback — DOMContentLoaded geçtiyse hemen çalıştır
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            window.parent.postMessage({ type: 'iframe_ready' }, '*');
+            initializeSite();
+        }
 
         // Wix REST API ile ürün çek (Velo yoksa doğrudan çalışır)
         async function fetchWixProducts() {
@@ -2886,8 +2892,8 @@
         // Main initialization function - will be filled below
         function initializeSite() {
             // This will be called after DOM is ready
-            setTimeout(loadAssets, 100);
-            setTimeout(initLogic, 500);
+            loadAssets();
+            setTimeout(initLogic, 100);
         }
         
         // Load external assets
@@ -2971,6 +2977,9 @@
             };
         }
         
+        // navigateTo alias — go() ile aynı işlevi görür
+        function navigateTo(view) { go(view); }
+
         // Placeholder for initLogic - will be implemented with full methods
         function initLogic() {
             console.log("Initializing Logic...");
@@ -3475,8 +3484,4 @@
                     if (target) navigateTo(target);
                 });
             });
-            // badge-m senkronizasyonu
-            const obs = new MutationObserver(function() {
-                const b = document.getElementById('badge');
-                const bm = document.getElementById('badge-m');
-                if (b && bm) bm.textContent = b.textCon
+            
