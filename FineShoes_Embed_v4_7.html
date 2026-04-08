@@ -2064,14 +2064,14 @@
                     class="logo-img" src="https://static.wixstatic.com/media/e8a500_a76ce736fd2a46528717f7147e7b90e5~mv2.png"
                     style="height:90px; width:auto;"></div>
             <nav class="menu">
-                <a data-nav="home" data-key="nav_home" style="cursor:pointer;">Anasayfa</a>
-                <a data-nav="products" data-key="nav_products" style="cursor:pointer;">Ürünler</a>
-                <a data-nav="about" data-key="nav_about" style="cursor:pointer;">Hakkımızda</a>
-                <a data-nav="contact" data-key="nav_contact" style="cursor:pointer;">İletişim</a>
+                <a data-nav="home" data-key="nav_home" onclick="go('home')" style="cursor:pointer;">Anasayfa</a>
+                <a data-nav="products" data-key="nav_products" onclick="go('products')" style="cursor:pointer;">Ürünler</a>
+                <a data-nav="about" data-key="nav_about" onclick="go('about')" style="cursor:pointer;">Hakkımızda</a>
+                <a data-nav="contact" data-key="nav_contact" onclick="go('contact')" style="cursor:pointer;">İletişim</a>
             </nav>
             <div class="nav-icons">
-                <a data-action="toggle-search" style="cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></a>
-                <button class="quote-btn" data-action="toggle-cart"><span data-key="quote_btn">TEKLİF LİSTESİ</span> (<span
+                <a onclick="toggleSearch()" data-action="toggle-search" style="cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></a>
+                <button class="quote-btn" onclick="toggleCart()" data-action="toggle-cart"><span data-key="quote_btn">TEKLİF LİSTESİ</span> (<span
                         id="badge">0</span>)</button>
                 <button class="ham-btn" id="ham-btn" onclick="toggleMobileMenu(true)" aria-label="Menüyü Aç">&#9776;</button>
             </div>
@@ -2107,19 +2107,19 @@
             <img src="https://static.wixstatic.com/media/e8a500_7fd2db6c174d454c9c5626bbcddff08d~mv2.png"
                 class="cat-bg-img">
             <div class="cat-grid-overlay">
-                <div class="cat-zone" data-nav="products" style="cursor:pointer;" title="Klasik"></div>
-                <div class="cat-zone" data-nav="products" style="cursor:pointer;" title="Kışlık"></div>
-                <div class="cat-zone" data-nav="products" style="cursor:pointer;" title="Yazlık"></div>
+                <div class="cat-zone" onclick="go('products')" data-nav="products" style="cursor:pointer;" title="Klasik"></div>
+                <div class="cat-zone" onclick="go('products')" data-nav="products" style="cursor:pointer;" title="Kışlık"></div>
+                <div class="cat-zone" onclick="go('products')" data-nav="products" style="cursor:pointer;" title="Yazlık"></div>
             </div>
         </div>
         <div class="cat-labels-row">
-            <div class="cat-btn-wrap"><button class="cat-btn" data-nav="products" style="cursor:pointer;"
+            <div class="cat-btn-wrap"><button class="cat-btn" onclick="go('products')" data-nav="products" style="cursor:pointer;"
                     data-key="cat_classic">Klasik</button>
             </div>
-            <div class="cat-btn-wrap"><button class="cat-btn" data-nav="products" style="cursor:pointer;"
+            <div class="cat-btn-wrap"><button class="cat-btn" onclick="go('products')" data-nav="products" style="cursor:pointer;"
                     data-key="cat_winter">Kışlık</button>
             </div>
-            <div class="cat-btn-wrap"><button class="cat-btn" data-nav="products" style="cursor:pointer;"
+            <div class="cat-btn-wrap"><button class="cat-btn" onclick="go('products')" data-nav="products" style="cursor:pointer;"
                     data-key="cat_summer">Yazlık</button>
             </div>
         </div>
@@ -2169,7 +2169,7 @@
                         Misafirleriniz ve saha personeliniz için anında, pratik ve güvenilir çözüm.</p>
 
                     <div style="display:flex; flex-direction:column; align-items:center; gap:30px;">
-                        <button data-nav="safety-main" style="cursor:pointer;" class="cta-btn"
+                        <button onclick="go('safety-main')" data-nav="safety-main" style="cursor:pointer;" class="cta-btn"
                             style="background:#ff6f00; color:#fff; padding:15px 60px; font-weight:bold; border:none; border-radius:30px; transition:0.3s; cursor:pointer; font-size:1.1rem; box-shadow: 0 4px 15px rgba(255, 111, 0, 0.3);"
                             onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 111, 0, 0.4)'"
                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 111, 0, 0.3)'">BİLGİ
@@ -2193,7 +2193,7 @@
                 <div class="about-sec-text">
                     <h2 data-key="about_title">Hakkımızda</h2>
                     <p data-key="about_teaser">Fine Ayakkabıcılık, onlarca yıllık sektör deneyimiyle Türkiye'nin köklü ayakkabı üreticilerinden biridir. Hakiki deri işleme geleneğini modern üretim teknolojileriyle harmanlayan firmamız; klasik erkek ayakkabılarından EN ISO 20345 sertifikalı iş güvenliği ürünlerine kadar geniş bir koleksiyon sunar.<br><br>Her üretim aşamasında kalite kontrolü önceliğimizdir. El işçiliğinin inceliğini endüstriyel dayanıklılıkla buluşturan ürünlerimiz; fabrika ziyaretçilerinden saha çalışanlarına, kurumsal alıcılardan bireysel müşterilere kadar geniş bir kitleye hitap etmektedir.<br><br>Sancaktepe, İstanbul'daki üretim tesisimizden dünyaya açılan Fine Ayakkabıcılık; yerli üretim kalitesini, uluslararası standartlarda sunmaya devam etmektedir.</p>
-                    <button class="about-btn" data-nav="about" style="cursor:pointer;" data-key="corp_intro">KURUMSAL TANITIM →</button>
+                    <button class="about-btn" onclick="go('about')" data-nav="about" style="cursor:pointer;" data-key="corp_intro">KURUMSAL TANITIM →</button>
                 </div>
             </div>
         </div>
@@ -2309,7 +2309,7 @@
                     style="width:100%; max-width:700px; display:inline-block; border-radius:10px; box-shadow:0 10px 40px rgba(0,0,0,0.1);">
             </div>
 
-            <button class="close-view-btn" data-nav="home" style="cursor:pointer;">X</button>
+            <button class="close-view-btn" onclick="go('home')" data-nav="home" style="cursor:pointer;">X</button>
         </div>
     </div>
     <!-- PRODUCT DETAIL VIEW -->
@@ -2317,9 +2317,9 @@
         <!-- Breadcrumb bar -->
         <div class="pd-hero-bar">
             <div class="pd-breadcrumb">
-                <span style="cursor:pointer;" data-nav="home">ANA SAYFA</span>
+                <span style="cursor:pointer;" onclick="go('home')" data-nav="home">ANA SAYFA</span>
                 &nbsp;/&nbsp;
-                <span style="cursor:pointer;" data-nav="products">ÜRÜNLER</span>
+                <span style="cursor:pointer;" onclick="go('products')" data-nav="products">ÜRÜNLER</span>
                 &nbsp;/&nbsp;
                 <span id="pd-bread-name" style="color:#f0f0f0;"></span>
             </div>
@@ -2349,7 +2349,7 @@
                             data-action="validate-qty-detail">
                         <div class="pd-qty-btn" data-action="mod-qty-detail" data-amount="10" style="cursor:pointer;">+</div>
                     </div>
-                    <button class="pd-add-btn" data-action="add-from-detail" style="cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 448 512" fill="currentColor"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg> <span data-key="add_to_list">LİSTEYE EKLE</span></button>
+                    <button class="pd-add-btn" onclick="addFromDetail()" data-action="add-from-detail" style="cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 448 512" fill="currentColor"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg> <span data-key="add_to_list">LİSTEYE EKLE</span></button>
                 </div>
                 <div class="pd-trust-badges">
                     <div class="pd-trust-item"><svg xmlns="http://www.w3.org/2000/svg" height="13" width="13" viewBox="0 0 512 512" fill="currentColor"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z"/></svg> EN ISO 20345 Sertifikalı</div>
@@ -2380,7 +2380,7 @@
             <li>EN ISO 20345:2011 Belgesi</li>
             <li data-key="doc_anti">Antistatik Test Raporu</li>
         </ul>
-        <button class="info-link" data-nav="home" style="cursor:pointer;" data-key="back_home">← ANA SAYFAYA DÖN</button>
+        <button class="info-link" onclick="go('home')" data-nav="home" style="cursor:pointer;" data-key="back_home">← ANA SAYFAYA DÖN</button>
     </div>
 
     <!-- RESTORED ABOUT US VIEW (FULL TEXT HARDCODED) -->
@@ -2401,7 +2401,7 @@
             <p><strong>Güven · Etik · Yenilik · Yerli Üretim</strong> — Bu dört temel ilke, her adımımızda rehberimizdir.</p>
 
             <p style="margin-top:30px; font-weight:500;" data-key="about_closing">Fine Ayakkabıcılık A.Ş. olarak, profesyonel çalışma anlayışımız ve tüm paydaşlarımızla kurduğumuz güçlü bağlarla; geleceğin adımlarını bugünden atmaya devam ediyoruz.</p>
-            <div style="text-align:center; margin-top:40px;"><button class="info-link" data-nav="home" style="cursor:pointer;"
+            <div style="text-align:center; margin-top:40px;"><button class="info-link" onclick="go('home')" data-nav="home" style="cursor:pointer;"
                     data-key="back_home">← ANA SAYFAYA DÖN</button></div>
         </div>
     </div>
@@ -2450,14 +2450,14 @@
                         <div class="kvkk-check-row">
                             <input type="checkbox" required id="kvkk-enlightenment-contact">
                             <label for="kvkk-enlightenment-contact">
-                                <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Aydınlatma Metni</a>'ni okudum ve onaylıyorum.
+                                <a class="kvkk-link" onclick="go('policy')" data-nav="policy" style="cursor:pointer;">Aydınlatma Metni</a>'ni okudum ve onaylıyorum.
                             </label>
                         </div>
 
                         <div class="kvkk-check-row">
                             <input type="checkbox" required id="kvkk-privacy-contact">
                             <label for="kvkk-privacy-contact">
-                                <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>'nı okudum ve onaylıyorum.
+                                <a class="kvkk-link" onclick="go('policy')" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>'nı okudum ve onaylıyorum.
                             </label>
                         </div>
 
@@ -2635,7 +2635,7 @@
 
             <div style="text-align:center; margin-top:60px; padding-top:30px; border-top:1px solid #eee;">
                 <p style="color:#999; font-size:0.85rem; margin-bottom:20px;">Bu politikalar Fine Ayakkabıcılık tarafından yürürlükteki Türk mevzuatına uygun olarak hazırlanmıştır.</p>
-                <button class="info-link" data-nav="home" style="cursor:pointer;" data-key="back_home">← ANA SAYFAYA DÖN</button>
+                <button class="info-link" onclick="go('home')" data-nav="home" style="cursor:pointer;" data-key="back_home">← ANA SAYFAYA DÖN</button>
             </div>
         </div>
     </div>
@@ -2649,10 +2649,10 @@
 
             <!-- Category Filter Buttons for Products View (Minimalist Tabs) -->
             <div class="filter-tabs">
-                <button class="filter-tab active" data-action="filter-products" data-category="all" style="cursor:pointer;">Tümü</button>
-                <button class="filter-tab" data-action="filter-products" data-category="classic" style="cursor:pointer;">Klasik</button>
-                <button class="filter-tab" data-action="filter-products" data-category="winter" style="cursor:pointer;">Kışlık</button>
-                <button class="filter-tab" data-action="filter-products" data-category="summer" style="cursor:pointer;">Yazlık</button>
+                <button class="filter-tab active" onclick="filterProducts('all', this)" data-action="filter-products" data-category="all" style="cursor:pointer;">Tümü</button>
+                <button class="filter-tab" onclick="filterProducts('classic', this)" data-action="filter-products" data-category="classic" style="cursor:pointer;">Klasik</button>
+                <button class="filter-tab" onclick="filterProducts('winter', this)" data-action="filter-products" data-category="winter" style="cursor:pointer;">Kışlık</button>
+                <button class="filter-tab" onclick="filterProducts('summer', this)" data-action="filter-products" data-category="summer" style="cursor:pointer;">Yazlık</button>
             </div>
 
             <div class="prod-sec" style="padding:0;">
@@ -2661,7 +2661,7 @@
                 </div>
             </div>
         </div>
-        <div style="text-align:center; margin-top:50px;"><button class="info-link" data-nav="home" style="cursor:pointer;"
+        <div style="text-align:center; margin-top:50px;"><button class="info-link" onclick="go('home')" data-nav="home" style="cursor:pointer;"
                 data-key="back_home">← ANA SAYFAYA DÖN</button></div>
     </div>
     </div>
@@ -2675,15 +2675,15 @@
                 <div class="f-text">Eyüp Sultan Mah. Mehmet Akif Cad.<br>No:19-21/A Sancaktepe, İstanbul 34885<br><br>Pazartesi-Cuma : 08.30-18.00</div>
             </div>
             <div>
-                <div class="f-head" data-key="corp_head">KURUMSAL</div><a class="f-link" data-nav="about" style="cursor:pointer;"
+                <div class="f-head" data-key="corp_head">KURUMSAL</div><a class="f-link" onclick="go('about')" data-nav="about" style="cursor:pointer;"
                     data-key="nav_about">Hakkımızda</a>
-                <a class="f-link" data-nav="contact" style="cursor:pointer;" data-key="nav_contact">İletişim</a>
+                <a class="f-link" onclick="go('contact')" data-nav="contact" style="cursor:pointer;" data-key="nav_contact">İletişim</a>
             </div>
             <div>
                 <div class="f-head" data-key="legal_head">YASAL</div>
-                <a class="f-link" data-nav="policy" style="cursor:pointer;">Mağaza Politikası</a>
-                <a class="f-link" data-nav="policy" style="cursor:pointer;">Çerez Politikası</a>
-                <a class="f-link" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>
+                <a class="f-link" onclick="go('policy')" data-nav="policy" style="cursor:pointer;">Mağaza Politikası</a>
+                <a class="f-link" onclick="go('policy')" data-nav="policy" style="cursor:pointer;">Çerez Politikası</a>
+                <a class="f-link" onclick="go('policy')" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>
             </div>
             <div>
                 <div class="f-head" data-key="contact_head">İLETİŞİM</div>
@@ -2701,7 +2701,7 @@
     <!-- COOKIE SETTINGS MODAL -->
     <div id="cookie-settings-modal" class="modal">
         <div class="m-box" style="max-width:600px;">
-            <span class="close-m" data-action="toggle-cookie-settings" style="cursor:pointer;">&times;</span>
+            <span class="close-m" onclick="toggleCookieSettings()" data-action="toggle-cookie-settings" style="cursor:pointer;">&times;</span>
             <h2 style="font-family:var(--font-head);">Çerez Ayarları</h2>
             <p style="color:#666; margin-bottom:20px; font-size:0.9rem;">Web sitemizin düzgün çalışması için zorunlu
                 çerezleri kullanıyoruz. Diğer çerezleri ise deneyiminizi geliştirmek için tercihlerinize
@@ -2739,7 +2739,7 @@
                 </label>
             </div>
 
-            <button class="submit-btn" data-action="save-cookie-settings" style="cursor:pointer;" style="margin-top:20px;">AYARLARI
+            <button class="submit-btn" onclick="saveCookieSettings()" data-action="save-cookie-settings" style="cursor:pointer;" style="margin-top:20px;">AYARLARI
                 KAYDET</button>
         </div>
     </div>
@@ -2752,13 +2752,13 @@
             <p style="color:#666; font-size:1.1rem;">İsteğiniz / Teklifiniz başarıyla tarafımıza ulaşmıştır. 2 iş
                 günü
                 içerisinde size e-posta yoluyla dönüş yapılacaktır.</p>
-            <button class="submit-btn" data-action="close-success"
+            <button class="submit-btn" onclick="document.getElementById('success-modal').classList.remove('open')" data-action="close-success"
                 style="margin-top:30px; background:#333; cursor:pointer;">TAMAM</button>
         </div>
     </div>
 
     <div id="modal" class="modal">
-        <div class="m-box"><span class="close-m" data-action="toggle-cart" style="cursor:pointer;">&times;</span>
+        <div class="m-box"><span class="close-m" onclick="toggleCart()" data-action="toggle-cart" style="cursor:pointer;">&times;</span>
             <h2 data-key="quote_req">Teklif İsteği</h2>
             <div id="cart-list" style="margin:20px 0; border-bottom:1px solid #eee;"></div>
             <form id="quote-form">
@@ -2770,14 +2770,14 @@
                 <div class="kvkk-check-row">
                     <input type="checkbox" required id="kvkk-enlightenment">
                     <label for="kvkk-enlightenment">
-                        <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Aydınlatma Metni</a>'ni okudum ve onaylıyorum.
+                        <a class="kvkk-link" onclick="go('policy')" data-nav="policy" style="cursor:pointer;">Aydınlatma Metni</a>'ni okudum ve onaylıyorum.
                     </label>
                 </div>
 
                 <div class="kvkk-check-row">
                     <input type="checkbox" required id="kvkk-privacy">
                     <label for="kvkk-privacy">
-                        <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>'nı okudum ve onaylıyorum.
+                        <a class="kvkk-link" onclick="go('policy')" data-nav="policy" style="cursor:pointer;">Gizlilik Politikası</a>'nı okudum ve onaylıyorum.
                     </label>
                 </div>
 
@@ -2792,13 +2792,13 @@
             <div class="cb-text">
                 <strong>Çerez Tercihleriniz:</strong> Sitemizde deneyimi iyileştirmek için çerezler kullanıyoruz.
                 "Tümünü Kabul Et" diyerek analitik ve pazarlama çerezlerine onay verebilirsiniz.
-                Detaylar için <a class="kvkk-link" data-nav="policy" style="cursor:pointer;">Çerez Politikası</a>'nı
+                Detaylar için <a class="kvkk-link" onclick="go('policy')" data-nav="policy" style="cursor:pointer;">Çerez Politikası</a>'nı
                 inceleyiniz.
             </div>
             <div class="cb-btns">
-                <button class="cb-btn" data-action="cookie-choice" data-choice="reject" style="cursor:pointer;">Reddet</button>
-                <button class="cb-btn" data-action="cookie-choice" data-choice="settings" style="cursor:pointer;">Ayarlar</button>
-                <button class="cb-btn accept" data-action="cookie-choice" data-choice="accept" style="cursor:pointer;">Tümünü Kabul Et</button>
+                <button class="cb-btn" onclick="cookieChoice('reject')" data-action="cookie-choice" data-choice="reject" style="cursor:pointer;">Reddet</button>
+                <button class="cb-btn" onclick="cookieChoice('settings')" data-action="cookie-choice" data-choice="settings" style="cursor:pointer;">Ayarlar</button>
+                <button class="cb-btn accept" onclick="cookieChoice('accept')" data-action="cookie-choice" data-choice="accept" style="cursor:pointer;">Tümünü Kabul Et</button>
             </div>
         </div>
     </div>
