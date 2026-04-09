@@ -35,6 +35,8 @@
 
         html, body {
             height: auto;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body {
@@ -42,6 +44,8 @@
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
+            position: relative;
+            width: 100%;
         }
 
         a {
@@ -255,7 +259,7 @@
             font-size: 8vw;
             line-height: 1.1;
             text-transform: uppercase;
-            overflow: visible;
+            overflow: hidden;
         }
 
         .hero-title span {
@@ -2044,8 +2048,11 @@
                 gap: 6px;
                 padding: 8px 4%;
                 font-size: 0.72rem;
+                max-width: 100%;
+                overflow: hidden;
             }
-            .ts-right { gap: 10px; }
+            .ts-right { gap: 8px; flex-wrap: wrap; font-size: 0.65rem; }
+            .ts-left { max-width: 100%; }
 
             /* Nav */
             .menu { display: none; }
@@ -2147,6 +2154,220 @@
             .safe-mid-col { min-width: unset; }
             .pd-title { font-size: 1.5rem; }
             .sec-head h2 { font-size: 1.4rem; }
+        }
+
+        /* ====== MOBİL GENEL DÜZELTMELER ====== */
+        #wrapper {
+            overflow-x: hidden;
+            overflow-y: auto;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Çerez banner — mobil kompakt */
+        @media (max-width: 768px) {
+            .cookie-banner {
+                padding: 10px 3%;
+                gap: 6px;
+            }
+            .cb-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .cb-text {
+                font-size: 0.7rem;
+                line-height: 1.3;
+                max-height: 45px;
+                overflow: hidden;
+            }
+            .cb-btns {
+                flex-direction: row;
+                gap: 6px;
+            }
+            .cb-btn {
+                padding: 7px 10px;
+                font-size: 0.7rem;
+                flex: 1;
+                text-align: center;
+                min-width: 0;
+            }
+        }
+
+        /* Safety sayfası — mobil inline style override */
+        @media (max-width: 768px) {
+            #safety-main-view [style*="min-width:300px"],
+            #safety-main-view [style*="min-width: 300px"] {
+                min-width: 0 !important;
+                width: 100% !important;
+            }
+            #safety-main-view [style*="display:flex"][style*="gap:40px"] {
+                gap: 20px !important;
+            }
+            #safety-main-view [style*="flex:1.2"] {
+                flex: 1 !important;
+            }
+            #safety-main-view [style*="font-size:2.5rem"] {
+                font-size: 1.6rem !important;
+            }
+            #safety-main-view [style*="font-size:3rem"] {
+                font-size: 1.5rem !important;
+            }
+            .safe-v2-container {
+                padding: 10px 12px 40px !important;
+            }
+            #safety-main-view [style*="padding:40px"] {
+                padding: 20px 14px !important;
+            }
+            #safety-main-view [style*="gap:40px"] {
+                gap: 16px !important;
+            }
+        }
+
+        /* Hakkımızda — mobil */
+        @media (max-width: 768px) {
+            .about-sec-inner {
+                flex-direction: column !important;
+            }
+            .about-sec-img img {
+                min-height: 220px !important;
+            }
+            .about-sec-text {
+                padding: 25px 16px !important;
+            }
+        }
+
+        /* Kategori bölümü — mobil */
+        @media (max-width: 768px) {
+            .cat-labels-row {
+                flex-wrap: wrap;
+            }
+            .cat-btn-wrap {
+                min-width: 45%;
+            }
+            .cat-btn {
+                font-size: 0.7rem;
+                padding: 10px 0;
+            }
+        }
+
+        /* Telefon input — mobil */
+        @media (max-width: 768px) {
+            .phone-wrap {
+                flex-direction: row;
+            }
+            .phone-country {
+                min-width: 85px;
+                padding: 0 8px;
+            }
+            .phone-country .dial-code {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Ana sayfa güvenlik preview — mobil */
+        @media (max-width: 768px) {
+            .safety-preview-sec [style*="display:flex"][style*="width:100%"] {
+                flex-direction: column !important;
+            }
+            .safety-preview-sec [style*="min-width:300px"] {
+                min-width: 0 !important;
+                width: 100% !important;
+            }
+            .safety-preview-sec [style*="font-size:3rem"] {
+                font-size: 1.5rem !important;
+            }
+            .safety-preview-sec [style*="font-size:1.4rem"] {
+                font-size: 1rem !important;
+            }
+            .safety-preview-sec [style*="gap:40px"] {
+                gap: 15px !important;
+            }
+            .safety-preview-sec [style*="font-size:1.05rem"] {
+                font-size: 0.85rem !important;
+            }
+        }
+
+        /* Footer — mobil */
+        @media (max-width: 768px) {
+            .f-grid { gap: 15px; }
+            footer .logo-img { height: 50px !important; }
+        }
+
+        /* Modal / Teklif formu — mobil */
+        @media (max-width: 480px) {
+            .m-box {
+                width: 96% !important;
+                padding: 18px 14px !important;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* İletişim sayfası — mobil */
+        @media (max-width: 768px) {
+            #contact-view [style*="min-width:300px"] {
+                min-width: 0 !important;
+                width: 100% !important;
+            }
+        }
+
+        /* Genel taşma önleme */
+        @media (max-width: 768px) {
+            .hero-title { word-break: break-word; }
+            table { display: block; overflow-x: auto; max-width: 100%; }
+            pre, code { overflow-x: auto; max-width: 100%; }
+
+            /* Her bölüm taşmasın */
+            .top-strip,
+            header,
+            .hero-sec,
+            .cat-spacer,
+            .cat-unified,
+            .cat-labels-row,
+            .prod-sec,
+            .safety-preview-sec,
+            .about-sec,
+            .related-sec,
+            .page-view,
+            footer,
+            .cookie-banner,
+            .safe-v2-container {
+                max-width: 100vw !important;
+                overflow-x: hidden !important;
+            }
+
+            /* Nav bar taşma */
+            .nav-inner {
+                max-width: 100%;
+            }
+
+            /* Swiper taşma */
+            .home-slider-wrap {
+                padding: 0 35px !important;
+                max-width: 100%;
+                overflow: hidden;
+            }
+            .home-swiper {
+                overflow: hidden !important;
+            }
+
+            /* Kategori butonları */
+            .cat-labels-row {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Hero font boyutu */
+            .hero-title {
+                font-size: 12vw !important;
+            }
         }
     </style>
 </head>
