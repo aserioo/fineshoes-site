@@ -2226,7 +2226,7 @@
                         Misafirleriniz ve saha personeliniz için anında, pratik ve güvenilir çözüm.</p>
 
                     <div style="display:flex; flex-direction:column; align-items:center; gap:30px;">
-                        <button onclick="openSafetyProduct()"
+                        <button data-nav="safety-main"
                             style="cursor:pointer; background:#000; color:#fff; padding:18px 60px; font-weight:700; border:3px solid #d4af37; border-radius:0; transition:0.3s; font-size:1.1rem; letter-spacing:2px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); text-transform:uppercase;"
                             onmouseover="this.style.background='#d4af37'; this.style.color='#000'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(212,175,55,0.4)'"
                             onmouseout="this.style.background='#000'; this.style.color='#fff'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.15)'">BİLGİ
@@ -2264,7 +2264,7 @@
             <div style="display:flex; flex-wrap:wrap; gap:40px; margin-bottom:50px; align-items:center;">
                 <!-- Left: Image -->
                 <div style="flex:1; min-width:300px;">
-                    <img src="https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png"
+                    <img id="safety-hero-img" src="https://static.wixstatic.com/media/e8a500_a8b7872846cd4faf8284b625e64f37d4~mv2.png"
                         style="width:100%; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,0.1);">
                 </div>
                 <!-- Right: Info -->
@@ -2281,7 +2281,7 @@
                     </p>
 
                     <div style="display:flex; gap:20px; margin-bottom:30px; flex-wrap:wrap;">
-                        <button data-action="add-product" data-product-id="2" class="cta-btn" style="padding:18px 40px; font-size:1.1rem; cursor:pointer;">
+                        <button id="safety-add-btn" data-action="add-product" data-product-id="safety-carik" class="cta-btn" style="padding:18px 40px; font-size:1.1rem; cursor:pointer;">
                             <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512" fill="currentColor" style="margin-right:8px;"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z" /></svg> LİSTEYE EKLE (+10)
                         </button>
                     </div>
@@ -3388,6 +3388,19 @@
         function navigateTo(view) { go(view); }
 
         function go(view) {
+            // safety-main açılırken Wix ürün resmini güncelle
+            if (view === 'safety-main') {
+                var carik = window.products.find(function(p) {
+                    return isSafetyCarik(p.name);
+                });
+                if (carik) {
+                    var heroImg = document.getElementById('safety-hero-img');
+                    if (heroImg && carik.img) heroImg.src = carik.img;
+                    var addBtn = document.getElementById('safety-add-btn');
+                    if (addBtn) addBtn.setAttribute('data-product-id', carik.id);
+                }
+            }
+
             const h = document.getElementById('main-header');
             const home = document.getElementById('home-view');
             const homeExtras = document.getElementById('home-extras');
@@ -3412,8 +3425,19 @@
         }
 
         function openDetail(id) {
+            // Ziyaretçi çarığı → özel safety-main sayfasına yönlendir
+            var product = window.products.find(x => x.id === id);
+            if (product && isSafetyCarik(product.name)) {
+                var heroImg = document.getElementById('safety-hero-img');
+                if (heroImg && product.img) heroImg.src = product.img;
+                var addBtn = document.getElementById('safety-add-btn');
+                if (addBtn) addBtn.setAttribute('data-product-id', product.id);
+                go('safety-main');
+                return;
+            }
+
             window.currentOpenId = id;
-            const p = window.products.find(x => x.id === id);
+            const p = product || window.products.find(x => x.id === id);
             if (!p) return;
 
             const mainImg = document.getElementById('pd-main-img');
@@ -3717,18 +3741,27 @@
 
         // ---- PHONE INPUT FUNCTIONS ----
 
-        // Ziyaretçi çarığı ürününü bul ve aç
+        // Ziyaretçi çarığı → safety-main sayfasını aç, resimleri güncelle
         function openSafetyProduct() {
             var found = window.products.find(function(p) {
                 var n = (p.name || '').toLowerCase();
                 return n.includes('çarık') || n.includes('ziyaretçi') || n.includes('çelik burun');
             });
             if (found) {
-                openDetail(found.id);
-            } else {
-                // Ürünler henüz yüklenmediyse safety-main sayfasını aç
-                go('safety-main');
+                // Ürün resmini güncelle
+                var heroImg = document.getElementById('safety-hero-img');
+                if (heroImg && found.img) heroImg.src = found.img;
+                // LİSTEYE EKLE butonunun product ID'sini güncelle
+                var addBtn = document.getElementById('safety-add-btn');
+                if (addBtn) addBtn.setAttribute('data-product-id', found.id);
             }
+            go('safety-main');
+        }
+
+        // Çarık ürünü mü kontrol et
+        function isSafetyCarik(name) {
+            var n = (name || '').toLowerCase();
+            return n.includes('çarık') || n.includes('ziyaretçi');
         }
         function updateCountry(formType) {
             var select = document.getElementById('country-select-' + formType);
