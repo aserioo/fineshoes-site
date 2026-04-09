@@ -3119,6 +3119,17 @@
                        .replace(/&ndash;/g, '–')
                        .replace(/&mdash;/g, '—')
                        .replace(/&#\d+;/g, '');
+            // Bilinen etiket kalıplarından önce satır sonu ekle
+            // "Dış Materyali:", "İç Materyali:", "Taban Materyali:", "Kalıp Tipi:", "Asorti:", "Renk:", "Malzeme:" vb.
+            text = text.replace(/([^\n])((?:Dış|İç|Taban|Üst)\s*Matery)/g, '$1\n$2');
+            text = text.replace(/([^\n])(Kalıp\s*Tipi)/g, '$1\n$2');
+            text = text.replace(/([^\n])(Asorti\s*:)/g, '$1\n$2');
+            text = text.replace(/([^\n])(Renk\s*:)/g, '$1\n$2');
+            text = text.replace(/([^\n])(Malzeme\s*:)/g, '$1\n$2');
+            text = text.replace(/([^\n])(Burun\s*:)/g, '$1\n$2');
+            text = text.replace(/([^\n])(Astar\s*:)/g, '$1\n$2');
+            text = text.replace(/([^\n])(Numara\s*:)/g, '$1\n$2');
+            text = text.replace(/([^\n])(Beden\s*:)/g, '$1\n$2');
             // Satır başı/sonu boşlukları temizle, 3+ boş satırı 2'ye indir
             text = text.split('\n').map(function(l) { return l.trim(); }).join('\n');
             text = text.replace(/\n{3,}/g, '\n\n').trim();
